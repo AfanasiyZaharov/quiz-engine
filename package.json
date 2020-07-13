@@ -1,0 +1,35 @@
+{
+  "name": "vb-quiz-babeled",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack",
+    "build:dev": "webpack --config=webpack.dev.config.js",
+    "server": "webpack-dev-server"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-async-to-generator": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "add": "^2.0.6",
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "core-js": "^3.0.1",
+    "lodash": "^4.17.15",
+    "lodash.isequal": "^4.5.0",
+    "node-sass": "^4.11.0",
+    "shortid": "^2.2.15",
+    "uid": "^1.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1",
+    "yarn": "^1.15.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "babel-loader": "^8.0.5",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}

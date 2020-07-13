@@ -1,0 +1,66 @@
+Arguments: 
+  C:\program files\nodejs\node.exe C:\users\афанасий\appdata\roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Users\Афанасий\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Афанасий\bin;C:\program files (x86)\php\v7.0;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\windows\system32\windowspowershell\v1.0;C:\program files\microsoft vs code\bin;G:\program files (x86)\skype\phone;C:\program files\git\cmd;C:\program files\nodejs;C:\program files\java\jdk-11.0.1\bin;C:\program files\microsoft\web platform installer;C:\users\афанасий\appdata\local\microsoft\windowsapps;C:\users\афанасий\appdata\roaming\npm;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\Афанасий\AppData\Local\Microsoft\WindowsApps;C:\Users\Афанасий\AppData\Roaming\npm;C:\Users\Афанасий\AppData\Local\GitHubDesktop\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  10.13.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: B:\programming\VB_quiz\vb-quiz-babeled\package.json: Unexpected string in JSON at position 924
+      at JSON.parse (<anonymous>)
+      at C:\users\афанасий\appdata\roaming\npm\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\users\афанасий\appdata\roaming\npm\node_modules\yarn\lib\cli.js:304:30)
+      at C:\users\афанасий\appdata\roaming\npm\node_modules\yarn\lib\cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "vb-quiz-babeled",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "build": "webpack",
+      "build:dev": "webpack --config=webpack.dev.config.js",
+      "server": " webpack-dev-server"
+    },
+    "dependencies": {
+      "@babel/plugin-transform-async-to-generator": "^7.4.0",
+      "@babel/plugin-transform-runtime": "^7.4.3",
+      "@babel/preset-env": "^7.4.3",
+      "@babel/runtime": "^7.4.3",
+      "add": "^2.0.6",
+      "babel-core": "^6.26.3",
+      "babel-polyfill": "^6.26.0",
+      "core-js": "^3.0.1",
+      "lodash.isequal": "^4.5.0",
+      "node-sass": "^4.11.0",
+      "webpack": "^4.29.6",
+      "webpack-cli": "^3.3.0",
+      "webpack-dev-server": "^3.2.1",
+      "yarn": "^1.15.2"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.4.3",
+      "@babel/plugin-proposal-class-properties": "^7.4.0",
+      "babel-loader": "^8.0.5",
+      "eslint": "^6.6.0",
+      "eslint-config-google": "^0.14.0"
+    }
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

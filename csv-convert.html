@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSV import</title>
+</head>
+<body>
+  
+  <input type="file" id="upload">
+
+  <script>
+    document.getElementById('upload').addEventListener('change', readFileAsString)
+    function readFileAsString() {
+        var files = this.files;
+        if (files.length === 0) {
+            console.log('No file is selected');
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            console.log('File content:', event.target.result);
+            createCSVData(event.target.result);
+        };
+        reader.readAsText(files[0]);
+    }
+
+
+    const createCSVData = (text) =>{
+      const textArr = text.split('\n');
+      const keys = textArr.shift().split(';');
+      const questionsSections = textArr.map((line)=> createObjFromCsvLine(line, keys)).map(postProcess);
+      const sectionsBase = questionsSections.reduce((accum, value)=>{
+        console.log('accum', accum);
+        if(value.header){
+          accum.push(value);
+        }else{
+          if(accum.length){
+            accum[accum.length-1].questions.push(value);
+          }
+        }
+        return accum;
+      }, []);
+
+      console.log(textArr, questionsSections, sectionsBase);
+      console.log(JSON.stringify(sectionsBase, 4));
+    }
+    const createObjFromCsvLine = (textLine, keys) =>{
+      const values = textLine.split(';');
+      if(values[1] === "" && values[2] === ""){
+        return {
+          header: values[0],
+          questions: [],
+        };
+      }else{
+        return {
+          [keys[0]]: values[0],
+          [keys[1]]: values[1],
+          [keys[2]]: values[2],
+          [keys[3]]: values[3] || null,
+        }
+      }
+    }
+
+    const postProcess = (elem) =>{
+      let resultElem = {...elem};
+      if(elem.header){
+        elem.header = elem.header.replace(/^ +/, '').replace(/"/g, '');
+        return elem;
+      }
+
+      if(resultElem.questionType.includes('Несколько из списка')){
+        resultElem.questionType = 'variants-multi';
+      }
+      if(resultElem.questionType.includes('Один из списка')){
+        resultElem.questionType = 'variants-single';
+      }
+      if(resultElem.rightAnswers){
+        resultElem.rightAnswers = elem.rightAnswers.split('||');
+      }
+      if(elem.variants){
+        resultElem.variants = elem.variants.split('||');
+      }
+      return resultElem;
+    }
+  </script>
+</body>
+</html>
