@@ -28,7 +28,6 @@ var formDocument = () =>{
   const sections = [];
 
   const sectionsDom = Array.from(document.querySelectorAll(sectionSelector));
-  console.log('sections', sectionsDom);
   sectionsDom.forEach((element)=>{
     let resultObj = {};
     const textareasName = Array.from(element.querySelector(pageSectionTextSelector).querySelectorAll(pageSectionTextFind));
@@ -43,9 +42,6 @@ var formDocument = () =>{
     }
   });
     
-
-  console.log('parsed sec', sections);
-
 
   const resToExport = [];
   for (let i = 0; i<sections.length; i++){
@@ -73,16 +69,13 @@ var convertSectionToCSVprepare = (section) =>{
 var formQuestions = (rootElem) =>{
   let resultArr = [];
   const questionsDom = Array.from(rootElem.querySelectorAll(questionDomSelector));
-  console.log('questionsDom', questionsDom);
 
   resultArr = questionsDom.map(findQuestionData).filter((elem)=>elem);
-  console.log('resultArr', resultArr);
   return resultArr;
 }
 
 var findQuestionData = (questionElem) =>{
   const questionText = questionElem.querySelector(questionTextSelector).value;
-  console.log('questionT', questionText);
   let questionType;
   let rightAnswers;
   let rightAnswerDom = questionElem.querySelector(text_question_right_answer);

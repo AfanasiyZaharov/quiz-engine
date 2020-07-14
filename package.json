@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack",
-    "build:dev": "webpack --config=webpack.dev.config.js",
+    "build:prod": "webpack --config=webpack.prod.config.js",
     "server": "webpack-dev-server"
   },
   "dependencies": {

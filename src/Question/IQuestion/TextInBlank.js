@@ -1,10 +1,9 @@
 import {questionTemplate, validateErrorText} from '../templates';
 import {validateSimpleText, validateTextInBlank} from '../checkStringValid';
-import {IQuestion} from './IQuestion';
+import IQuestion from './IQuestion';
 
 export default class TextInBlankQuestion extends IQuestion{
   questionTemplate =  (...args) => {
-    console.log('args', args);
     return questionTemplate(...args);
   }
 
@@ -18,7 +17,6 @@ export default class TextInBlankQuestion extends IQuestion{
   }
 
   changeHandler  = (el) =>{
-    console.log('change', el.target.value);
     const userValue = el.target.value;
     this.userValue = userValue;
     this.check(userValue);

@@ -1,14 +1,16 @@
+import isEqual from 'lodash.isequal';
 
 const ShorteningDictionary = {
   'can not': `can't`, 
   'will not': `won't`, 
   ' is': `'s`,
+  '\'s': `'s`,
   ' have': `'ve`,
   ' has': `'s`,
   ' would': `'d`,
   ' had': `'d`,
   ' are': `'re`,
-  ' will': `ll`,
+  ' will': `'ll`,
   ' am' : `'m`,
   'is not': `isn't`,
   'are not': `aren't`,
@@ -50,7 +52,6 @@ const prepareString = (answer) => {
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
   const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
-  console.log('poss', userAnswersPossibilities, rightAnswers);
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
 } 
 
@@ -104,7 +105,6 @@ let findShorteningsPossibilities = (userAnswer) =>{
     }
   }
 // for one shortening.
-  console.log('vars', textVariants);
   if(findMaxPrevious(textVariants, 999)){
     return textVariants[findMaxPrevious(textVariants, 999)].map((variant)=> variant.join(' '));
   }else{
@@ -117,6 +117,29 @@ export const validateTextInBlank = (userAnswer, rightAnswers, questionText) =>{
   rightAnswers = [...rightAnswers, ...rightAnswers.map((rightAnswer)=> questionText.replace(/_+/g, rightAnswer))];
   const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
+}
+
+export const validateMultiBlanks = (userAnswers, rightAnswers) => {
+  let validIndexes = [];
+  let isAllValid = false;
+  if(userAnswers.length > rightAnswers.length){
+    return {
+      correct: true,
+      correctIndexes: -1,
+    }
+  }
+  for(let i = 0; i<userAnswers.length; i++){
+    if(validateSimpleText(userAnswers[i], [rightAnswers[i]])){
+      validIndexes.push(i);
+    }
+  }
+  if(validIndexes.length === userAnswers.length){
+    isAllValid = true;
+  }
+  return {
+    correct: isAllValid,
+    correctIndexes: validIndexes,
+  }
 }
 
 

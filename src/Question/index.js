@@ -15,12 +15,10 @@ class Question {
   //document.querySelector('input[name="I live in a very small village. You probably won’t find it __ your map."]:checked').value
 
   check = (value) => {
-    console.log('toCheck', value);
     const { rightAnswers, questionType, questionText } = this.questionData;
     if(questionType === 'simple-text'){
       var result = validateSimpleText(value, rightAnswers);
       this.resultCorrect = result;
-      console.log('resu', result);
     }
     if(questionType === 'text-in-blank'){
       var result = validateTextInBlank(value, rightAnswers, questionText);

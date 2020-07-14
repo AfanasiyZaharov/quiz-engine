@@ -1,19 +1,46 @@
 
 
 export const validateErrorText = (rightAnswers) =>{
-  return `right answer are ${rightAnswers.join(', ')}`;
+  return `
+    <div class="hints-answers-container">
+      ${rightAnswers.map((answer)=> `<div class="hint">${answer}</div>`).join(' ')}
+    </div>
+  `;
+  // return `right answer are ${rightAnswers.join(', ')}`;
+}
+
+const calculateWidth =  (answers) =>{
+  let maxLength = 0;
+  for(let i = 0; i<answers.length; i++){
+    if(answers[i].length > maxLength){
+      maxLength = answers[i].length;
+    }
+  }
+  if(maxLength < 7){
+    return 60;
+  }
+  if(maxLength < 10){
+    return 90;
+  }
+  if(maxLength < 18){
+    return 150;
+  }
+  if(maxLength < 25){
+    return 200;
+  }
+  return 210;
 }
 
 export const questionTemplate = (questionData, id) => {
-  console.log('id', id);
   if(questionData.questionType === 'text-in-blank'){
     const splitted = questionData.questionText.split(/_+/);
-    // const width = questionData.rightAnswers.find((length))
+    const width = calculateWidth(questionData.rightAnswers);
     return `
-    <div class = "question" id="${id}">
-      <div class="question-text">${splitted.join(`${answerTemplateInBlank(answerTemplateInBlank, 60)}`)}</div>
+    <div class = "question in-blank" id="${id}">
+      <div class="question-text">${splitted.join(`${answerTemplateInBlank(answerTemplateInBlank, width)}`)}</div>
       <div class="check-sign"><i class="fa fa-check-circle-o" aria-hidden="true"></i></div>
-      <div class="right-answers"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="hint-sign"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="hint-container"></div>
     </div>
   `;
   }else{
@@ -24,7 +51,8 @@ export const questionTemplate = (questionData, id) => {
         ${answerTemplate(questionData)}
       </div>
       <div class="check-sign"><i class="fa fa-check-circle-o" aria-hidden="true"></i></div>
-      <div class="right-answers"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="hint-sign"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="hint-container"></div>
     </div>
   `;
   }
@@ -53,9 +81,11 @@ export const answerTemplate = (questionData) =>{
     console.log(`      <form>
     <div>
       ${questionData.variants.map((value, index)=>`
+      <div class="checkbox-container">
         <input type="radio" id="${questionData.questionText}-${index}"
           name="${questionData.questionText}-${index}" value="${value}" />
         <label for="${questionData.questionText}-${index}">${value}</label>
+        </div>
       `).join(' ')}
     </div>
   </form>`);
@@ -64,9 +94,11 @@ export const answerTemplate = (questionData) =>{
       <form>
         <div>
           ${questionData.variants.map((value, index)=>`
+          <div class="checkbox-container">
             <input type="radio" id="${questionData.questionText}-${index}"
               name="${questionData.questionText}" value="${value}" />
             <label for="${questionData.questionText}-${index}">${value}</label>
+            </div>
           `).join(' ')}
         </div>
       </form>

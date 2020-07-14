@@ -31,7 +31,7 @@
     const createCSVData = (text) =>{
       const textArr = text.split('\n');
       const keys = textArr.shift().split(';');
-      const questionsSections = textArr.map((line)=> createObjFromCsvLine(line, keys)).map(postProcess);
+      const questionsSections = textArr.map((line)=> createObjFromCsvLine(line, keys)).filter(obj=>!!obj).map(postProcess);
       const sectionsBase = questionsSections.reduce((accum, value)=>{
         console.log('accum', accum);
         if(value.header){
@@ -49,6 +49,9 @@
     }
     const createObjFromCsvLine = (textLine, keys) =>{
       const values = textLine.split(';');
+      if(!values[1] && values[0] === ""){
+        return null;
+      }
       if(values[1] === "" && values[2] === ""){
         return {
           header: values[0],

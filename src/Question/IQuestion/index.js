@@ -1,77 +1,19 @@
-import {questionTemplate, validateErrorText} from '../templates';
-import {validateSimpleText, validateTextInBlank} from '../checkStringValid';
+import SimpleTextQuestion from './SimpleText';
+import TextInBlankQuestion from './TextInBlank';
+import MultiTextInBlankQuestion from './MultipleTextInBlank';
+import SingleVariantQuestion from './SingleVariants';
+import MultiVariantsQuestion from './MultiVariants';
 import uid from '../../_utils/uid';
-import SimpleText from './SimpleText';
-import TextInBlank from './TextInBlank';
 
-
-class IQuestion{
-  constructor(questionData, parentElem){
-    this.questionData = questionData;
-    this.parentElem = parentElem;
-    this.id = uid();
-    this.resultCorrect = false;
-    this.checkInitialized = false;
-    this.firstTimeCorrect = false;
-    this.input = null;
-  }
-
-  hide = () =>{
-    this.mainElement.style.display = "none";
-  }
-
-  check = () =>{
-    const answer = this.getAnswer();
-    const result = this.certainCheck(answer);
-    if(!this.checkInitialized){
-      this.checkInitialized = true;
-      this.firstTimeCorrect = result;
-    }
-    this.resultCorrect = result;
-    this.renderResult(result);
-    console.log('resu', result);
-  }
-
-  renderResult = (isCorrect) =>{
-    console.log('isCOrrent',isCorrect);
-    if(isCorrect){
-
-      this.mainElement.classList.remove('incorrect');
-      this.mainElement.classList.add('correct');
-    }else{
-      this.mainElement.classList.remove('correct');
-      this.mainElement.classList.add('incorrect');
-    }
-
-  }
-
-  renderQuestion(){
-    const html = this.questionTemplate(this.questionData, this.id);
-    this.parentElem.insertAdjacentHTML('beforeend', html);
-    console.log('html', html);
-
-    console.log('this.parentElem.lastChild', this.parentElem.querySelector(`#${this.id}`));
-    const mainElement = this.parentElem.querySelector(`#${this.id}`);
-    this.mainElement = mainElement;
-    this.input = this.mainElement.querySelector('input');
-    this.baseAddListeners();
-  }
-
-
-  baseAddListeners = () =>{
-    // this.mainElement.querySelector('input').addEventListener('change', this.changeHandler);
-    this.mainElement.querySelector('.check-sign').addEventListener('click', this.check);
-
-  }
-  
-}
 
 
 export class TextBeforeQuestion{
   constructor(text, parentElem){
     this.text = text;
     this.parentElem = parentElem;
-    this.checkResult = true;
+    this.resultCorrect = true;
+    this.firstTimeCorrect = true;
+    this.uid = uid();
   }
 
   hide = () =>{
@@ -83,73 +25,31 @@ export class TextBeforeQuestion{
   }
 
   renderQuestion = () =>{
-    const sectionHeaderText = `<div class="question section-header">${this.sections[this.currentSection].header}</div>`;
+    const sectionHeaderText = `<div class="question section-header" id="${this.uid}">${this.text}</div>`;
     this.parentElem.insertAdjacentHTML('beforeend', sectionHeaderText);
+    this.mainElement = this.parentElem.querySelector(`#${this.uid}`);
   }
 }
 
-class SimpleTextQuestion extends IQuestion{
-  // constructor(questionData, parentElem){
-  //   super()
-  // }
-  questionTemplate =  (...args) => {
-    console.log('args', args);
-    return questionTemplate(...args);
+
+const createTextInBlank = (questionData, parentElem, callback) =>{
+  if(questionData.questionText.match(/_+/g).length > 1){
+    return new MultiTextInBlankQuestion(questionData, parentElem, callback);
+  }else{
+    return new TextInBlankQuestion(questionData, parentElem, callback);
   }
-
-  getAnswer(){
-    return this.input.value;
-  }
-
-  certainCheck = (userAnswer) =>{  
-    const { rightAnswers } = this.questionData;
-    return validateSimpleText(userAnswer, rightAnswers);
-  }
-
-  check = (userAnswer) => {
-    return validateSimpleText(userAnswer, rightAnswers);
-  }
-
-  changeHandler  = (el) =>{
-    console.log('change', el.target.value);
-    const userValue = el.target.value;
-    this.userValue = userValue;
-    this.check(userValue);
-  }
-
-} 
-
-class TextInBlankQuestion extends IQuestion{
-  
-  questionTemplate =  (...args) => {
-    console.log('args', args);
-    return questionTemplate(...args);
-  }
-
-  getAnswer(){
-    return this.input.value;
-  }
-
-  certainCheck = (userAnswer) => {
-    const { rightAnswers, questionText } = this.questionData;
-    return validateTextInBlank(userAnswer, rightAnswers, questionText);
-  }
-
-  changeHandler  = (el) =>{
-    console.log('change', el.target.value);
-    const userValue = el.target.value;
-    this.userValue = userValue;
-    this.check(userValue);
-  }
-
 }
 
-export const createQuestion = (questionData, parentElem) =>{
+export const createQuestion = (questionData, parentElem, callback) =>{
   switch(questionData.questionType){
     case 'simple-text':
-      return new SimpleTextQuestion(questionData, parentElem);
+      return new SimpleTextQuestion(questionData, parentElem, callback);
     case 'text-in-blank':
-      return new TextInBlankQuestion(questionData, parentElem);
-      
+      return createTextInBlank(questionData, parentElem, callback)
+    case 'variants-multi':
+      return new MultiVariantsQuestion(questionData, parentElem, callback);
+    case 'variants-single':
+      return new SingleVariantQuestion(questionData, parentElem, callback);
+      //return new TextInBlankQuestion(questionData, parentElem, callback);
   }
 }

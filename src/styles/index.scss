@@ -1,34 +1,63 @@
 
 body{
   background-color: rgb(239, 238, 233);
-  font-family: "Open Sans", sans-serif;
 }
 #quiz{
   display: flex;
-  width: 800px;
+  max-width: 800px;
+  min-width: 300px;
   margin: 0 auto;
   flex-direction: column;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 .question{
   position: relative;
   background-color: #fff;
   border: 1px solid #dadce0;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 12px;
   padding: 24px;
   page-break-inside: avoid;
+  overflow: hidden;
 }
+
+.hint-container{
+  position: absolute;
+  display: none;
+  background-color: white;
+  border: 1px solid #5d636f;
+  width: 50%;
+  height: 70%;
+  border-radius: 5px;
+  padding: 5px;
+  color: #28a745;
+  top: 5px;
+  right:  3.6%;
+  animation: hint 0.3s ease-in-out 1;
+}
+
+.last-message{
+  padding: 16px;
+  font-size: 25px;
+}
+
+@keyframes hint {
+  0% { right: -70%;}
+  99% { right:  3.6%}
+ }
 
 .question .check-sign{
   cursor: pointer;
-  color: green;
+  color: #28a745;
   position: absolute;
   bottom: 0.5vw;
   right: 0.6vw;
   font-size: 20px;
 }
 
-.question .right-answers{
+.question .hint-sign{
   cursor: pointer;
   color: grey;
   position: absolute;
@@ -38,11 +67,41 @@ body{
 }
 
 .question.correct{
-  border: 1px solid green;
+  border: 1px solid #28a745;
+}
+
+.question.correct{
+  border: 1px solid #28a745;
+  background-color: rgba(40,167,69,0.05);
 }
 
 .question.incorrect{
-  border: 1px solid red;
+  border: 1px solid #dc3545;
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.question.incorrect .answer-text-input.in-blank{
+  background-color: rgba(220, 53, 69, 0.5);
+}
+
+.question .answer-text-input.in-blank.incorrect{
+  background-color: rgba(220, 53, 69, 0.5);
+}
+
+div.question.correct .answer-text-input.in-blank{
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+div.question .answer-text-input.in-blank.correct{
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+.checkbox-container{
+  margin-bottom: 4px;
+}
+.checkbox-container label{
+  position: relative;
+  bottom: 1px;
 }
 
 .question-text{
@@ -55,6 +114,10 @@ body{
   width: 100%;
   word-break: break-word;
   margin-bottom: 16px;
+}
+
+.question.in-blank .question-text{
+  margin-bottom: 0px;
 }
 
 .answer{
@@ -71,6 +134,7 @@ body{
   margin-right: 5px;
 }
 .answer-text-input{
+  background: transparent;
   padding: 2px;
   border: 0;
   border-bottom: 1px solid #dadce0;
@@ -91,6 +155,7 @@ body{
 
 .answer-text-input.in-blank:focus{
   outline: none;
+  border: 1px solid #dadce0;
 }
 
 .error-text{
@@ -101,12 +166,16 @@ body{
 }
 
 .button{
-  width: 150px;
+  width: 180px;
   height: 40px;
   border-radius: 10px;
   border: none;
   background-color: white;
   cursor: pointer;
+}
+
+#start{
+  align-self: center;
 }
 
 .button:focus{
@@ -120,4 +189,47 @@ body{
 .button-container{
   display: flex;
   justify-content: space-around;
+}
+
+@media (max-width: 600px) {
+  .answer-text{
+    width: 90%;
+  }
+
+  .question .check-sign{
+    right: 30px;
+    font-size: 25px;
+    bottom: 3vw;
+  }
+  
+  .question .hint-sign{
+    right: 30px;
+    font-size: 25px;
+    bottom: 3vw;
+  }
+  .question.in-blank .question-text{
+    margin-bottom: 12px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .question{
+    padding-right: 45px;
+  }
+
+  .question .check-sign{
+    right: 20px;
+    font-size: 22px;
+  }
+  
+  .question .hint-sign{
+    right: 20px;
+    font-size: 22px;
+  }
+  .button {
+    width: 130px;
+    height: 40px;
+    font-size: 12px;
+  }
 }
