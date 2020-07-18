@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>CSV import</title>
-  <!-- <script src="windows-1251.js"></script> -->
-</head>
-<body>
-  <script>
-    </script>
-  <input type="file" id="upload">
+const windows1251 = require('windows-1251');
+const parser = require('papaparse');
 
-  <script>
-    document.getElementById('upload').addEventListener('change', readFileAsString);
+document.addEventListener("DOMContentLoaded", ()=>{
+
+  document.getElementById('upload').addEventListener('change', readFileAsString);
     function readFileAsString() {
         var files = this.files;
         if (files.length === 0) {
@@ -24,10 +14,13 @@
         var reader = new FileReader();
         reader.onload = function(event) {
             console.log('File content:', event.target.result);
-            // if(event.target.result.includes('�')){
-            //   event.target.result = windows1251.decode(event.target.result);
+            let textFileData = event.target.result;
+            // if(textFileData.includes('�')){
+            //   console.log('includes');
+            //   console.log(windows1251.decode(textFileData));
             // }
-            createCSVData(event.target.result);
+            console.log('papa ', parser.parse(textFileData))
+            createCSVData(textFileData);
         };
         reader.readAsText(files[0]);
     }
@@ -51,6 +44,13 @@
 
       console.log(textArr, questionsSections, sectionsBase);
       console.log(JSON.stringify(sectionsBase, 4));
+      const insertHTML = `
+        <div id = "quiz"></div>
+        <script src="https://use.fontawesome.com/cb33df8389.js"></script>
+        <script> window.testData = ${JSON.stringify(sectionsBase, 4)}</script>
+        <script src = "link to lib"></script>
+      `;
+      document.querySelector('#code-container').innerText = insertHTML;
     }
     const createObjFromCsvLine = (textLine, keys) =>{
       const values = textLine.split(';');
@@ -93,11 +93,5 @@
       }
       return resultElem;
     }
-  </script>
-  <div>
-    <code id = "code-container">
+});
 
-      </code>
-  </div>
-</body>
-</html>

@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: './src/index.js',
+    loader: './src/loader.js',
   },
   devServer: {
     contentBase: './dist',

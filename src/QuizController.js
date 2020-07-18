@@ -39,7 +39,7 @@ class QuizController{
     this.convertedQuestions.forEach((question)=>{
       question.hide();
     });
-    // this.nextButton.style.display = 'none';
+    this.nextButton.style.display = 'none';
     // this.parentElement.querySelector('.section-header') ? this.parentElement.querySelector('.section-header').style.display = 'none' : null;
     let section = this.parentElement.querySelector('.section-header');
     if(section){
@@ -86,11 +86,11 @@ class QuizController{
 
     this.checkButton = document.querySelector('#check_button');
     this.nextButton = document.querySelector('#next-section');
-    // this.nextButton.style.display = 'none';
+    this.nextButton.style.display = 'none';
 
     this.checkButton.addEventListener('click', this.checkCorrect);
-    // this.nextButton.addEventListener('click', ()=>{this.changeSection(this.currentSection + 1);});
-    this.nextButton.addEventListener('click', ()=>{this.renderCongrats();});
+    this.nextButton.addEventListener('click', ()=>{this.changeSection(this.currentSection + 1);});
+    // this.nextButton.addEventListener('click', ()=>{this.renderCongrats();});
 
     this.questionsContainer = this.parentElement.querySelector('.questions-list');
   }

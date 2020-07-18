@@ -18,11 +18,13 @@
     "lodash": "^4.17.15",
     "lodash.isequal": "^4.5.0",
     "node-sass": "^4.11.0",
+    "papaparse": "^5.2.0",
     "shortid": "^2.2.15",
     "uid": "^1.0.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
+    "windows-1251": "^1.0.0",
     "yarn": "^1.15.2"
   },
   "devDependencies": {
