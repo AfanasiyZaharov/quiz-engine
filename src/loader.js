@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         <div id = "quiz"></div>
         <script src="https://use.fontawesome.com/cb33df8389.js"></script>
         <script> window.testData = ${JSON.stringify(sectionsBase, 4)}</script>
-        <script src = "link to lib"></script>
+        <script src ="https://cdn.jsdelivr.net/gh/AfanasiyZaharov/quiz-engine/dist/app.js"></script>
       `;
       document.querySelector('#code-container').innerText = insertHTML;
     }
@@ -95,3 +95,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 });
 
+
+
+
+function test(a,b){
+  return a + b;
+}
+
+
+var MathMagic = {
+  multiplier: 2,
+  sum: function (a, b){
+    return a+b*this.multiplier;
+  }
+}
