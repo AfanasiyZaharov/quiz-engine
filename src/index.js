@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   
   appendStyles();
 
-  const html = `<button class="button" id="start">Start Quiz</button>`
+  const html = `<button class="button" id="start">Start</button>`
   const container = document.querySelector('#quiz');
   container.insertAdjacentHTML('beforeend', html);
   const button = container.querySelector('#start');

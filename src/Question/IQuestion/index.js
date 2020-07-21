@@ -25,7 +25,14 @@ export class TextBeforeQuestion{
   }
 
   renderQuestion = () =>{
-    const sectionHeaderText = `<div class="question section-header" id="${this.uid}">${this.text}</div>`;
+    const splitRegExp = new RegExp(/(Mission [0-9.]+) /);
+    let splittedText = this.text.split(splitRegExp);
+    if(splittedText.length !== 3){
+      splittedText = this.text;
+    }else{
+      splittedText = `${splittedText[0]}${splittedText[1]} </br> ${splittedText[2]}`;
+    }
+    const sectionHeaderText = `<div class="question section-header" id="${this.uid}">${splittedText}</div>`;
     this.parentElem.insertAdjacentHTML('beforeend', sectionHeaderText);
     this.mainElement = this.parentElem.querySelector(`#${this.uid}`);
   }

@@ -25,6 +25,11 @@ body{
   overflow: hidden;
 }
 
+.question.section-header{
+  font-size: 19px;
+  font-weight: bold;
+}
+
 .hint-container{
   position: absolute;
   display: none;
@@ -177,6 +182,7 @@ div.question .answer-text-input.in-blank.correct{
 }
 
 #start{
+  font-size: 28px;
   width: 200px;
   height: 55px;
   align-self: center;
