@@ -1,5 +1,4 @@
 
-
 export const validateErrorText = (rightAnswers) =>{
   return `
     <div class="hints-answers-container">
@@ -38,8 +37,8 @@ export const questionTemplate = (questionData, id) => {
     return `
     <div class = "question in-blank" id="${id}">
       <div class="question-text">${splitted.join(`${answerTemplateInBlank(answerTemplateInBlank, width)}`)}</div>
-      <div class="check-sign"><i class="fa fa-check-circle-o" aria-hidden="true"></i></div>
-      <div class="hint-sign"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="check-sign"><i class="fas fa-sign-in-alt"></i></div>
+      <div class="hint-sign"><i class="far fa-question-circle"></i></div>
       <div class="hint-container"></div>
     </div>
   `;
@@ -50,8 +49,8 @@ export const questionTemplate = (questionData, id) => {
       <div class="answer">
         ${answerTemplate(questionData)}
       </div>
-      <div class="check-sign"><i class="fa fa-check-circle-o" aria-hidden="true"></i></div>
-      <div class="hint-sign"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="check-sign"><i class="fas fa-sign-in-alt"></i></div>
+      <div class="hint-sign"><i class="far fa-question-circle"></i></div>
       <div class="hint-container"></div>
     </div>
   `;

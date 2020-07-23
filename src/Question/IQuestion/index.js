@@ -30,7 +30,7 @@ export class TextBeforeQuestion{
     if(splittedText.length !== 3){
       splittedText = this.text;
     }else{
-      splittedText = `${splittedText[0]}${splittedText[1]} </br> ${splittedText[2]}`;
+      splittedText = `${splittedText[0]}${splittedText[1]} </br> <span class="text-question-italic">${splittedText[2]}</span>`;
     }
     const sectionHeaderText = `<div class="question section-header" id="${this.uid}">${splittedText}</div>`;
     this.parentElem.insertAdjacentHTML('beforeend', sectionHeaderText);
