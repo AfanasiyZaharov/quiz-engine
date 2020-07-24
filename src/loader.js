@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
     const createCSVData = (text) =>{
-      const textArr = text.split('\n');
+      const textArr = text.replace('\r', '').split('\n');
       const keys = textArr.shift().split(';');
       const questionsSections = textArr.map((line)=> createObjFromCsvLine(line, keys)).filter(obj=>!!obj).map(postProcess);
       const sectionsBase = questionsSections.reduce((accum, value)=>{
@@ -89,7 +89,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
         resultElem.rightAnswers = elem.rightAnswers.split('||');
       }
       if(elem.variants){
-        resultElem.variants = elem.variants.split('||');
+        if(elem.variants){
+          resultElem.variants = elem.variants.split('||');
+        }else{
+          resultElem.variants = elem['variants\r'].split('||');
+        }
+
       }
       return resultElem;
     }

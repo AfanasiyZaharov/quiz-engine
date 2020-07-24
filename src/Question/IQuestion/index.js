@@ -56,6 +56,17 @@ export const createQuestion = (questionData, parentElem, callback) =>{
     case 'variants-multi':
       return new MultiVariantsQuestion(questionData, parentElem, callback);
     case 'variants-single':
+      let quesVariants;
+      if(questionData['variants\r'] ){
+        quesVariants = questionData['variants\r']
+      }else if(questionData['variants']){
+        quesVariants = questionData['variants'];
+      }
+
+      if(typeof quesVariants === 'string'){
+        questionData.variants = quesVariants.split('||');
+      }
+
       return new SingleVariantQuestion(questionData, parentElem, callback);
       //return new TextInBlankQuestion(questionData, parentElem, callback);
   }

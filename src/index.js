@@ -46,7 +46,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const styleElem = document.createElement('style');
     styleElem.innerHTML = scss;
 
+    const script = document.createElement('script');
+    script.src="https://kit.fontawesome.com/1745ac394a.js";
+
     head.appendChild(styleElem);
+    head.appendChild(script);
   }
   
   appendStyles();

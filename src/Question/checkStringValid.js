@@ -51,7 +51,7 @@ const prepareString = (answer) => {
 
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
-  const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
+  const userAnswersPossibilities = [...rightAnswers, ...findShorteningsPossibilities(userAnswer)];
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
 } 
 

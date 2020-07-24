@@ -74,7 +74,7 @@ export const answerTemplate = (questionData) =>{
       </div>
     `;
   }
-
+  console.log('questiondata', questionData);
   if(questionData.questionType === 'variants-single'){
 
     console.log(`      <form>
