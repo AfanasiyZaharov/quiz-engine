@@ -37,7 +37,7 @@ var findShorteningRegExp = new RegExp(/\w+(?='\w+)/g);
 
 
 
-const compareTwo = (userAnswer, rightAnswer) =>{
+export const compareTwo = (userAnswer, rightAnswer) =>{
   let workedUserAnswer = prepareString(userAnswer);
   let workedRightAnswer = prepareString(rightAnswer);
   return workedUserAnswer === workedRightAnswer;
@@ -46,14 +46,21 @@ const compareTwo = (userAnswer, rightAnswer) =>{
 
 // make trim, remove dot on the end, lowercase, ...etc
 const prepareString = (answer) => {
-  return answer.toLowerCase().replace(/\.$/, '').replace(/ +/g, ' ').replace(/ $/, '').replace(/^ /, '').replace(/\.$/, '');
+  return answer.toLowerCase().replace(/\.$/, '').replace(/ +/g, ' ').replace(/ $/, '').replace(/^ /, '').replace(/\.$/, '').replace(/\n$/, '');
 }
 
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
   const userAnswersPossibilities = [...rightAnswers, ...findShorteningsPossibilities(userAnswer)];
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
-} 
+}
+
+export const checkMulti = (userAnswers, rightAnswers) =>{
+  let workedUserAnswers = userAnswers.sort().map((answer)=> prepareString(answer));
+  let workedRightAnswer = rightAnswers.sort().map((answer)=> prepareString(answer));
+  return isEqual(workedUserAnswers, workedRightAnswer);
+  
+}
 
 const findMaxPrevious = (obj, currentKey) =>{
   let max = -1;

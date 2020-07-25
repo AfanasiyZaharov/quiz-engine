@@ -1,7 +1,7 @@
 import isEqual from 'lodash.isequal';
 
 import {questionTemplate, validateErrorText} from '../templates';
-import {validateSimpleText, validateTextInBlank} from '../checkStringValid';
+import {validateSimpleText, validateTextInBlank, checkMulti} from '../checkStringValid';
 import IQuestion from './IQuestion';
 
 export default class MultiVariantsQuestion extends IQuestion{

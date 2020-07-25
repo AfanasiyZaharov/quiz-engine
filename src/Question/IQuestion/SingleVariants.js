@@ -1,5 +1,5 @@
 import {questionTemplate, validateErrorText} from '../templates';
-import {validateSimpleText, validateTextInBlank} from '../checkStringValid';
+import {validateSimpleText, validateTextInBlank, compareTwo} from '../checkStringValid';
 import IQuestion from './IQuestion';
 
 export default class SingleVariantQuestion extends IQuestion{
@@ -18,7 +18,7 @@ export default class SingleVariantQuestion extends IQuestion{
 
   certainCheck = (userAnswer) => {
     const { rightAnswers } = this.questionData;
-    return rightAnswers[0] === userAnswer;
+    return compareTwo(rightAnswers[0], userAnswer);
   }
 
 }
