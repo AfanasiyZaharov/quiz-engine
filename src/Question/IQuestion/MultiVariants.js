@@ -18,9 +18,38 @@ export default class MultiVariantsQuestion extends IQuestion{
     return [];
   }
 
+  changeListener = (e)=>{
+    if(!this.inputs.includes(e.target)){
+      this.check();
+      window.document.removeEventListener('change', this.changeListener);
+      window.document.removeEventListener('focusin', this.changeListener);
+    }
+  }
+
+  addCertainListeners = () =>{
+    this.inputs.forEach((input)=>{
+      input.addEventListener('change', (e)=>{
+        window.document.addEventListener('change', this.changeListener);
+        window.document.addEventListener('focusin', this.changeListener);
+      });
+    })
+  }
+
+  hide = () =>{
+    super.hide();
+    window.document.removeEventListener('change', this.changeListener);
+    window.document.removeEventListener('focusin', this.changeListener);
+  }
+
+  renderQuestion(){
+    super.renderQuestion();
+    this.inputs = Array.from(this.mainElement.querySelectorAll('input'));
+    this.addCertainListeners();
+  }
+
   certainCheck = (userAnswers) => {
     const { rightAnswers } = this.questionData;
-    return isEqual(rightAnswers.sort(), userAnswers.sort());
+    return checkMulti(userAnswers, rightAnswers);
   }
 
 }

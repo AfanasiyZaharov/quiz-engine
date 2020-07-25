@@ -51,7 +51,8 @@ const prepareString = (answer) => {
 
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
-  const userAnswersPossibilities = [...rightAnswers, ...findShorteningsPossibilities(userAnswer)];
+  console.log('validate simple', userAnswer, rightAnswers);
+  const userAnswersPossibilities = [userAnswer, ...findShorteningsPossibilities(userAnswer)];
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
 }
 
@@ -127,6 +128,7 @@ export const validateTextInBlank = (userAnswer, rightAnswers, questionText) =>{
 }
 
 export const validateMultiBlanks = (userAnswers, rightAnswers) => {
+  debugger;
   let validIndexes = [];
   let isAllValid = false;
   if(userAnswers.length > rightAnswers.length){
@@ -143,6 +145,7 @@ export const validateMultiBlanks = (userAnswers, rightAnswers) => {
   if(validIndexes.length === userAnswers.length){
     isAllValid = true;
   }
+  console.log('isAll', isAllValid);
   return {
     correct: isAllValid,
     correctIndexes: validIndexes,

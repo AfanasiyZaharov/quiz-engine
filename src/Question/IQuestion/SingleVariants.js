@@ -16,6 +16,35 @@ export default class SingleVariantQuestion extends IQuestion{
     return undefined;
   }
 
+  changeListener = (e)=>{
+    if(!this.inputs.includes(e.target)){
+      this.check();
+      window.document.removeEventListener('change', this.changeListener);
+      window.document.removeEventListener('focusin', this.changeListener);
+    }
+  }
+
+  addCertainListeners = () =>{
+    this.inputs.forEach((input)=>{
+      input.addEventListener('change', (e)=>{
+        window.document.addEventListener('change', this.changeListener);
+        window.document.addEventListener('focusin', this.changeListener);
+      });
+    })
+  }
+
+  hide = () =>{
+    super.hide();
+    window.document.removeEventListener('change', this.changeListener);
+    window.document.removeEventListener('focusin', this.changeListener);
+  }
+
+  renderQuestion(){
+    super.renderQuestion();
+    this.inputs = Array.from(this.mainElement.querySelectorAll('input'));
+    this.addCertainListeners();
+  }
+
   certainCheck = (userAnswer) => {
     const { rightAnswers } = this.questionData;
     return compareTwo(rightAnswers[0], userAnswer);
