@@ -2,6 +2,7 @@ import isEqual from 'lodash.isequal';
 
 const ShorteningDictionary = {
   'can not': `can't`, 
+  'cannot': `can't`, 
   'will not': `won't`, 
   ' is': `'s`,
   '\'s': `'s`,
@@ -52,7 +53,8 @@ const prepareString = (answer) => {
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
   console.log('validate simple', userAnswer, rightAnswers);
-  const userAnswersPossibilities = [userAnswer, ...findShorteningsPossibilities(userAnswer)];
+  const userAnswersPossibilities = [userAnswer, prepareString(userAnswer), ...findShorteningsPossibilities(userAnswer)];
+  console.log('possi', userAnswersPossibilities);
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
 }
 
@@ -124,7 +126,7 @@ let findShorteningsPossibilities = (userAnswer) =>{
 export const validateTextInBlank = (userAnswer, rightAnswers, questionText) =>{
   rightAnswers = [...rightAnswers, ...rightAnswers.map((rightAnswer)=> questionText.replace(/_+/g, rightAnswer))];
   const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
-  return compareEachToEach(userAnswersPossibilities, rightAnswers);
+  return compareEachToEach([...userAnswersPossibilities, userAnswer, prepareString(userAnswer)], rightAnswers);
 }
 
 export const validateMultiBlanks = (userAnswers, rightAnswers) => {
