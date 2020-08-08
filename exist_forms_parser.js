@@ -109,7 +109,6 @@ var findQuestionVariants = (questionElem) =>{
   const variantsDom = Array.from(questionElem.querySelectorAll(selectionVariants));
   const variants = variantsDom.map((varDom)=>varDom.querySelector('input').value);
   const rightAnswers = variantsDom.filter((varDom)=> varDom.querySelector(selectionRightElem)).map((varDom)=>varDom.querySelector('input').value);
-  console.log('questi elem', questionElem);
   let questionType = questionElem.querySelector(typeOfQuestionSelector)
   if(questionType){
     questionType = questionType.innerText;

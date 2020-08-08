@@ -74,20 +74,7 @@ export const answerTemplate = (questionData) =>{
       </div>
     `;
   }
-  console.log('questiondata', questionData);
   if(questionData.questionType === 'variants-single'){
-
-    console.log(`      <form>
-    <div>
-      ${questionData.variants.map((value, index)=>`
-      <div class="checkbox-container">
-        <input type="radio" id="${questionData.questionText}-${index}"
-          name="${questionData.questionText}-${index}" value="${value}" />
-        <label for="${questionData.questionText}-${index}">${value}</label>
-        </div>
-      `).join(' ')}
-    </div>
-  </form>`);
 
     return `
       <form>

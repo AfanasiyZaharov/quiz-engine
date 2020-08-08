@@ -147,7 +147,6 @@ export const validateMultiBlanks = (userAnswers, rightAnswers) => {
   if(validIndexes.length === userAnswers.length){
     isAllValid = true;
   }
-  console.log('isAll', isAllValid);
   return {
     correct: isAllValid,
     correctIndexes: validIndexes,
