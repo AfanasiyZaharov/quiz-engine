@@ -80,7 +80,7 @@ const findMaxPrevious = (obj, currentKey) =>{
 
 
 let findShorteningsPossibilities = (userAnswer) =>{
-
+  userAnswer = prepareString(userAnswer);
   let textVariants = {};
   const shortSybmols = ['’', '\'', '`', '"'];
   for (let i = 0; i<shortSybmols.length; i++){
