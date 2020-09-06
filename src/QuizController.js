@@ -137,6 +137,11 @@ class QuizController{
         ${Math.round(percentage)}% correct!
       </div>
     `;
+    const oldLastMessage = this.parentElement.querySelector('.last-message');
+    if(oldLastMessage){
+      this.parentElement.removeChild(oldLastMessage);
+    }
+
     this.parentElement.insertAdjacentHTML('beforeend', html);
   }
 

@@ -1,5 +1,11 @@
 import isEqual from 'lodash.isequal';
 
+const excludeData = [
+  "maria're",
+  'maria"re',
+  'maria`re',
+];
+
 const ShorteningDictionary = {
   'can not': `can't`, 
   'cannot': `can't`, 
@@ -52,9 +58,20 @@ const prepareString = (answer) => {
 
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
-  console.log('validate simple', userAnswer, rightAnswers);
-  const userAnswersPossibilities = [userAnswer, prepareString(userAnswer), ...findShorteningsPossibilities(userAnswer)];
-  console.log('possi', userAnswersPossibilities);
+  let removePossibilities = false;
+  console.log('ex', excludeData, userAnswer, prepareString(userAnswer));
+  if(excludeData.some((exclude)=>prepareString(userAnswer).includes(prepareString(exclude)))){
+    removePossibilities = true;
+  }
+  let userAnswersPossibilities;
+  if(!removePossibilities){
+    userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
+  }else{
+    userAnswersPossibilities = [userAnswer];
+  }
+  // console.log('validate simple', userAnswer, rightAnswers);
+  // const userAnswersPossibilities = [userAnswer, prepareString(userAnswer), ...findShorteningsPossibilities(userAnswer)];
+  // console.log('possi', userAnswersPossibilities);
   return compareEachToEach(userAnswersPossibilities, rightAnswers);
 }
 
@@ -125,12 +142,22 @@ let findShorteningsPossibilities = (userAnswer) =>{
 
 export const validateTextInBlank = (userAnswer, rightAnswers, questionText) =>{
   rightAnswers = [...rightAnswers, ...rightAnswers.map((rightAnswer)=> questionText.replace(/_+/g, rightAnswer))];
-  const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
+  let removePossibilities = false;
+  console.log('ex', excludeData, userAnswer, prepareString(userAnswer));
+  if(excludeData.some((exclude)=>prepareString(userAnswer).includes(prepareString(exclude)))){
+    removePossibilities = true;
+  }
+  let userAnswersPossibilities;
+  if(!removePossibilities){
+    userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
+  }else{
+    userAnswersPossibilities = [];
+  }
+  // const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
   return compareEachToEach([...userAnswersPossibilities, userAnswer, prepareString(userAnswer)], rightAnswers);
 }
 
 export const validateMultiBlanks = (userAnswers, rightAnswers) => {
-  debugger;
   let validIndexes = [];
   let isAllValid = false;
   if(userAnswers.length > rightAnswers.length){
