@@ -59,7 +59,6 @@ const prepareString = (answer) => {
 
 export const validateSimpleText = (userAnswer, rightAnswers) =>{
   let removePossibilities = false;
-  console.log('ex', excludeData, userAnswer, prepareString(userAnswer));
   if(excludeData.some((exclude)=>prepareString(userAnswer).includes(prepareString(exclude)))){
     removePossibilities = true;
   }
@@ -166,11 +165,73 @@ export const validateMultiBlanks = (userAnswers, rightAnswers) => {
       correctIndexes: -1,
     }
   }
-  for(let i = 0; i<userAnswers.length; i++){
-    if(validateSimpleText(userAnswers[i], [rightAnswers[i]])){
-      validIndexes.push(i);
+
+  if(rightAnswers.length % userAnswers.length > 0){
+    return {
+      correct: true,
+      correctIndexes: -1,
+    }
+  };
+
+  let globalVA = {
+    isOneTimeValid: false,
+    validIndexes: [],
+  }
+
+
+  for(let i = 0; i < rightAnswers.length; i+=userAnswers.length){
+    validIndexes = [];
+
+    for(let j = 0; j<userAnswers.length; j++){
+      if(validateSimpleText(userAnswers[j], [rightAnswers[j+i]])){
+        validIndexes.push(i);
+      }
+    }
+    if(validIndexes.length === userAnswers.length){
+      globalVA.isOneTimeValid = true;
+      globalVA.validIndexes = validIndexes;
+      break;
+    } else {
+      globalVA.validIndexes.push(...validIndexes);
     }
   }
+
+  console.log('globalVa', globalVA);
+
+  if(globalVA.isOneTimeValid){
+    return {
+      correct: true,
+      correctIndexes: validIndexes,
+    }
+  }else{
+    const uniq = globalVA.validIndexes.filter((v, i, a) => a.indexOf(v) === i);
+    if(uniq.length === userAnswers.length){
+      let uniqueUserAnswers = userAnswers.map((answer)=>prepareString(answer)).filter((v, i, a) => a.indexOf(v) === i);
+      if(uniqueUserAnswers.length === userAnswers.length){
+        return {
+          correct: true,
+          correctIndexes: validIndexes,
+        }
+      }else{
+        return {
+          correct: false,
+          correctIndexes: [],
+        }
+      }
+    } else {
+      return {
+        correct: false,
+        correctIndexes: uniq,
+      }
+    }
+  }
+
+  // for(let i = 0; i<userAnswers.length; i++){
+  //   if(validateSimpleText(userAnswers[i], [rightAnswers[i]])){
+  //     validIndexes.push(i);
+  //   }
+  // }
+  
   if(validIndexes.length === userAnswers.length){
     isAllValid = true;
   }
