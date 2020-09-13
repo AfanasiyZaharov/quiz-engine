@@ -71,7 +71,7 @@ export const validateSimpleText = (userAnswer, rightAnswers) =>{
   // console.log('validate simple', userAnswer, rightAnswers);
   // const userAnswersPossibilities = [userAnswer, prepareString(userAnswer), ...findShorteningsPossibilities(userAnswer)];
   // console.log('possi', userAnswersPossibilities);
-  return compareEachToEach(userAnswersPossibilities, rightAnswers);
+  return compareEachToEach([...userAnswersPossibilities, userAnswer], rightAnswers);
 }
 
 export const checkMulti = (userAnswers, rightAnswers) =>{
