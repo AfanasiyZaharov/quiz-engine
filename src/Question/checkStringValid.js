@@ -157,6 +157,7 @@ export const validateTextInBlank = (userAnswer, rightAnswers, questionText) =>{
 }
 
 export const validateMultiBlanks = (userAnswers, rightAnswers) => {
+  console.log('user', userAnswers, rightAnswers);
   let validIndexes = [];
   let isAllValid = false;
   if(userAnswers.length > rightAnswers.length){
@@ -184,7 +185,7 @@ export const validateMultiBlanks = (userAnswers, rightAnswers) => {
 
     for(let j = 0; j<userAnswers.length; j++){
       if(validateSimpleText(userAnswers[j], [rightAnswers[j+i]])){
-        validIndexes.push(i);
+        validIndexes.push(j);
       }
     }
     if(validIndexes.length === userAnswers.length){
