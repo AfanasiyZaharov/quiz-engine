@@ -1,61 +1,65 @@
 
 import Section from './Section';
-class QuizController{
+class QuizController {
 
   questions = [];
   convertedQuestions = [];
   oldQuestions = [];
 
-  constructor(sections=[], parentElement){
+  constructor(sections = [], parentElement) {
     this.sections = sections;
     this.maxSectionNumber = sections.length - 1;
+    if (this.maxSectionNumber === 0) {
+      this.isLastSection = true;
+    }
     this.parentElement = parentElement;
 
     this.renderMainControls();
-    this.convertedSections = sections.map((section, index)=>{
+    this.convertedSections = sections.map((section, index) => {
       return new Section(section, this.questionsContainer, this.renderNextSectionButton, index);
     });
+    // this.currentSection = 0;
     this.changeSection(0);
   }
 
-  initSection = (sectionNumber) =>{
+  initSection = (sectionNumber) => {
     this.currentSection = sectionNumber;
 
     this.convertedSections[sectionNumber].renderSection();
 
-    this.numberTextContainer.innerText = `Section ${sectionNumber+1} of ${this.convertedSections.length}`;
+    this.numberTextContainer.innerText = `Section ${sectionNumber + 1} of ${this.convertedSections.length}`;
 
   }
 
   changeSection = (sectionNumber) => {
     this.sectionNumber = sectionNumber;
-    if(sectionNumber < 0){
+    if (sectionNumber < 0) {
       return;
     }
-    if(sectionNumber > 0){
+    if (sectionNumber > 0) {
       this.prevButton.style.display = 'block';
-    }else{
+    } else {
       this.prevButton.style.display = 'none';
     }
-    if(sectionNumber > this.currentSection){
-      if(this.maxSectionNumber === sectionNumber){
+    if (sectionNumber > this.currentSection) {
+      if (this.maxSectionNumber === sectionNumber) {
         this.isLastSection = true;
-      }else if(this.sectionNumber > this.maxSectionNumber){
+      } else if (this.sectionNumber > this.maxSectionNumber) {
         this.nextButton.style.display = 'none';
         return;
       }
     }
 
-    if(this.currentSection !== undefined && this.currentSection !== null){
+    if (this.currentSection !== undefined && this.currentSection !== null) {
       this.convertedSections[this.currentSection].hideSection();
     }
 
-    if(!this.convertedSections[sectionNumber].completed){
+    if (!this.convertedSections[sectionNumber].completed) {
       this.nextButton.style.display = 'none';
-    }else{
-      if(!(sectionNumber >= this.maxSectionNumber)){
+    } else {
+      if (!(sectionNumber >= this.maxSectionNumber)) {
         this.nextButton.style.display = 'block';
-      }else{
+      } else {
         this.nextButton.style.display = 'none';
       }
 
@@ -64,7 +68,7 @@ class QuizController{
     this.initSection(sectionNumber);
   }
 
-  renderMainControls = () =>{
+  renderMainControls = () => {
 
     const html = `
     <div class = "questions-list"> </div>
@@ -79,7 +83,7 @@ class QuizController{
     this.parentElement.insertAdjacentHTML('beforeend', html);
 
     this.checkButton = document.querySelector('#check_button');
-    
+
     this.endQuizButton = document.querySelector('#end-quiz');
     this.endQuizButton.style.display = 'none';
 
@@ -89,46 +93,46 @@ class QuizController{
     this.prevButton = document.querySelector('#prev-section');
     this.prevButton.style.display = 'none';
 
-    this.numberTextContainer =  document.querySelector('#number-container');
+    this.numberTextContainer = document.querySelector('#number-container');
 
-    this.checkButton.addEventListener('click', ()=>{
+    this.checkButton.addEventListener('click', () => {
       this.convertedSections[this.currentSection].checkCorrect();
     });
-    this.nextButton.addEventListener('click', ()=>{this.changeSection(this.currentSection + 1);});
-    this.prevButton.addEventListener('click', ()=>{this.changeSection(this.currentSection - 1);});
+    this.nextButton.addEventListener('click', () => { this.changeSection(this.currentSection + 1); });
+    this.prevButton.addEventListener('click', () => { this.changeSection(this.currentSection - 1); });
 
     this.questionsContainer = this.parentElement.querySelector('.questions-list');
   }
 
-  renderNextSectionButton = () =>{
-    if(!this.isLastSection){
+  renderNextSectionButton = () => {
+    if (!this.isLastSection) {
       this.nextButton.style.display = 'block';
-    }else{
+    } else {
       this.endQuizButton.style.display = 'block';
-      this.endQuizButton.addEventListener('click', ()=>{
+      this.endQuizButton.addEventListener('click', () => {
         this.renderCongrats();
       });
     }
 
   }
 
-  renderCongrats = () =>{
+  renderCongrats = () => {
     this.questionsContainer.style.display = 'none';
-    this.numberTextContainer.style.display  = 'none';
+    this.numberTextContainer.style.display = 'none';
     this.parentElement.querySelector('.button-container').style.display = 'none';
     let allQuestions = [];
-    for(let i =0; i<this.convertedSections.length; i++){
+    for (let i = 0; i < this.convertedSections.length; i++) {
       // allQuestionsLength += this.convertedSections[i].convertedQuestions.length;
       allQuestions = [...allQuestions, ...this.convertedSections[i].convertedQuestions];
     }
     let allQuestionsLength = allQuestions.length - this.convertedSections.length;
 
 
-    let firstTimeCorrectCount = allQuestions.filter((quest)=>{
+    let firstTimeCorrectCount = allQuestions.filter((quest) => {
       return quest.firstTimeCorrect;
     }).length;
 
-    firstTimeCorrectCount  = firstTimeCorrectCount - this.sections.length;
+    firstTimeCorrectCount = firstTimeCorrectCount - this.sections.length;
     const percentage = (firstTimeCorrectCount / allQuestionsLength) * 100;
 
     const html = `
@@ -138,7 +142,7 @@ class QuizController{
       </div>
     `;
     const oldLastMessage = this.parentElement.querySelector('.last-message');
-    if(oldLastMessage){
+    if (oldLastMessage) {
       this.parentElement.removeChild(oldLastMessage);
     }
 

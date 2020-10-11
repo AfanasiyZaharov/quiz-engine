@@ -1,78 +1,33 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quiz example</title>
-    <script src="../dist/app.js"></script>
-    <!-- <script src="https://od.lk/f/ODJfNDkyMTIwMTFf/app.js"></script> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="./index.css"/> -->
-    <script src="https://kit.fontawesome.com/1745ac394a.js" crossorigin="anonymous"></script>
-    <script> window.testData = [
-      {
-         "header":"B4B Mission 1.1.1 Перефразируйте предложения, заменив существительные на местоимения. Используйте полную форму глагола TO BE.",
-         "questions":[
-            {
-               "questionType":"simple-text",
-               "questionText":"Tim and Alex are not students.",
-               "rightAnswers":[
-                  "Maria are my parents"
-               ],
-               "variants":[
-                  "\r"
-               ]
-            },
-            {
-               "questionType":"text-in-blank",
-               "questionText":"____ and _____",
-               "rightAnswers":[
-                  "good",
-                  "bad",
-                  "bad",
-                  "good",
-                  "excellent",
-                  "well",
-               ],
-               "variants":[
-                  "\r"
-               ]
-            },
-            {"questionType":"simple-text","questionText":"They are pretty boring.","rightAnswers":["They're pretty boring."],"variants":["\r"]},
-            {"questionType":"simple-text","questionText":"I am very tired today.","rightAnswers":["I'm very tired today."],"variants":["\r"]},
-            {"questionType":"text-in-blank","questionText":"I _______ (read) the book you lent me, but I _______ (not / finish) it yet. The plot is absolutely fascinating. ","rightAnswers":["have been reading","have not finished","'ve been reading","haven't finished"],"variants\r":"\r"}
-         ]
-      },
-      {
-         "header":"B4B Mission 1.1.2 Сократите AM, IS и ARE в предложениях. Запишите предложения целиком.",
-         "questions":[
-            {
-               "questionType":"simple-text",
-               "questionText":"We are hungry.",
-               "rightAnswers":[
-                  "We're hungry."
-               ],
-               "variants":[
-                  "\r"
-               ]
-            },
-            {
-               "questionType":"simple-text",
-               "questionText":"I am at home.",
-               "rightAnswers":[
-                  "I'm at home."
-               ],
-               "variants":[
-                  "\r"
-               ]
-            }
-         ]
-      }];
-    </script>
-  </head>
-  <body>
-    <div id="quiz"></div>
-  </body>
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Quiz example</title>
+   <script src="../dist/app.js"></script>
+   <!-- <script src="https://od.lk/f/ODJfNDkyMTIwMTFf/app.js"></script> -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+   <!-- <link rel="stylesheet" href="./index.css"/> -->
+   <script src="https://kit.fontawesome.com/1745ac394a.js" crossorigin="anonymous"></script>
+   <script> window.testData = [
+         {
+            "header": "Mission 3.6.3 Answer these questions. Sometimes more than one answer is correct.",
+            "questions": [
+               { "questionType": "simple-text", "questionText": "What are English-speaking people called?", "rightAnswers": ["anglophones"], "variants": ["\r"] }, 
+               { "questionType": "simple-text", "questionText": "a synonym for 'except'", "rightAnswers": ["but"], "variants": ["\r"] }, 
+               { "questionType": "simple-text", "questionText": "an adjective derived from 'elite'", "rightAnswers": ["elitist"], "variants": ["\r"] }, 
+               { "questionType": "simple-text", "questionText": "What preposition is ‘bother’ used with?", "rightAnswers": ["with"], "variants": ["\r"] },
+            ]
+         }
+      ]
+   </script>
+</head>
+
+<body>
+   <div id="quiz"></div>
+</body>
+
 </html>
