@@ -1,8 +1,8 @@
 import uid from '../../_utils/uid';
 import { validateErrorText } from '../templates';
 
-export default class IQuestion{
-  constructor(questionData, parentElem, checkCallback){
+export default class IQuestion {
+  constructor(questionData, parentElem, checkCallback) {
     this.questionData = questionData;
     this.parentElem = parentElem;
     this.id = uid();
@@ -13,38 +13,38 @@ export default class IQuestion{
     this.checkCallback = checkCallback;
   }
 
-  hide = () =>{
+  hide = () => {
     this.mainElement.style.display = "none";
   }
 
-  check = (shouldCallBack = true) =>{
+  check = (shouldCallBack = true) => {
     const answer = this.getAnswer();
     const result = this.certainCheck(answer);
-    if(!this.checkInitialized){
+    if (!this.checkInitialized) {
       this.checkInitialized = true;
       this.firstTimeCorrect = result;
       this.hintButton.style.display = 'block';
     }
     this.resultCorrect = result;
     this.renderResult(result);
-    if(shouldCallBack){
+    if (shouldCallBack) {
       this.checkCallback(result);
     }
   }
 
-  renderResult = (isCorrect) =>{
-    if(isCorrect){
+  renderResult = (isCorrect) => {
+    if (isCorrect) {
 
       this.mainElement.classList.remove('incorrect');
       this.mainElement.classList.add('correct');
-    }else{
+    } else {
       this.mainElement.classList.remove('correct');
       this.mainElement.classList.add('incorrect');
     }
 
   }
 
-  renderQuestion(){
+  renderQuestion() {
     const html = this.questionTemplate(this.questionData, this.id);
     this.parentElem.insertAdjacentHTML('beforeend', html);
     const mainElement = this.parentElem.querySelector(`#${this.id}`);
@@ -56,31 +56,31 @@ export default class IQuestion{
     this.baseAddListeners();
   }
 
-  showHints = () =>{
-    if(!this.errorsContainer){
-      const {rightAnswers} = this.questionData;
+  showHints = () => {
+    if (!this.errorsContainer) {
+      const { rightAnswers } = this.questionData;
       const html = validateErrorText(rightAnswers);
       this.hintContainer.insertAdjacentHTML('beforeend', html);
       this.errorsContainer = this.hintContainer.querySelector('.hints-answers-container');
     }
     this.hintContainer.style.display = 'block';
     this.hintContainer.addEventListener('click', this.closeHints);
-    setTimeout(()=>{
+    setTimeout(() => {
       this.closeHints();
     }, 2500);
   }
 
-  closeHints = () =>{
+  closeHints = () => {
     this.hintContainer.style.display = 'none';
   }
 
-  baseAddListeners = () =>{
+  baseAddListeners = () => {
     const inputs = this.mainElement.querySelectorAll('input');
-    if(inputs.length === 1){
-      this.mainElement.querySelector('input').addEventListener('change', this.check);
+    if (inputs.length === 1) {
+      this.mainElement.querySelector('input').addEventListener('keydown', (e) => { if(e.code === "Enter") {this.check();} });
     }
     this.mainElement.querySelector('.check-sign').addEventListener('click', this.check);
     this.hintButton.addEventListener('click', this.showHints);
   }
-  
+
 }

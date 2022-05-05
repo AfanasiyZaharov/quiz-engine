@@ -45,6 +45,9 @@ var findShorteningRegExp = new RegExp(/\w+(?='\w+)/g);
 
 
 export const compareTwo = (userAnswer, rightAnswer) => {
+  if (!userAnswer) {
+    userAnswer = '';
+  }
   let workedUserAnswer = prepareString(userAnswer);
   let workedRightAnswer = prepareString(rightAnswer);
   return workedUserAnswer === workedRightAnswer;
