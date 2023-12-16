@@ -56,7 +56,7 @@ export const compareTwo = (userAnswer, rightAnswer) => {
 
 // make trim, remove dot on the end, lowercase, ...etc
 const prepareString = (answer) => {
-  return answer.toLowerCase().replace(/\.$/, '').replace(/ +/g, ' ').replace(/ $/, '').replace(/^ /, '').replace(/\.$/, '').replace(/\n$/, '');
+  return answer.toLowerCase().replace(/\.$/, '').replace(/ +/g, ' ').replace(/ $/, '').replace(/^ /, '').replace(/\.$/, '').replace(/\n$/, '').replace(/\?/g, '').replace(/\,/g, '');
 }
 
 
