@@ -1,0 +1,600 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz example</title>
+    <script src="../dist/app.js"></script>
+    <!-- <script src="https://od.lk/f/ODJfNDkyMTIwMTFf/app.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./index.css"/> -->
+    <script src="https://kit.fontawesome.com/1745ac394a.js" crossorigin="anonymous"></script>
+    <script> window.testData = [
+            {
+                "header": "Test",
+                "questions": [
+                    {
+                        "questionText": "How old are you?",
+                        "variants": [
+                            "I have 27 years old",
+                            "I have 27 years",
+                            "I am fine",
+                            "I am 27 years old"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["I am 27 years old"]
+                    },
+                    {
+                        "questionText": "He went to the Stadium .....",
+                        "variants": [
+                            "with taxi",
+                            "by taxi",
+                            "on taxi",
+                            "in taxi"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["by taxi"]
+                    },
+                    {
+                        "questionText": "How long have you been living in London?",
+                        "variants": [
+                            "for 7 years",
+                            "at least 7 years",
+                            "since 7 years",
+                            "7 years ago"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["for 7 years"]
+                    },
+                    {
+                        "questionText": "We haven't got ..... money.",
+                        "variants": [
+                            "a lot",
+                            "some",
+                            "any",
+                            "many"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["any"]
+                    },
+                    {
+                        "questionText": "Choose the right sentence.",
+                        "variants": [
+                            "He like going to the movies",
+                            "He likes going to the movies",
+                            "He liked go to the movies",
+                            "He like the movies"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["He likes going to the movies"]
+                    },
+                    {
+                        "questionText": "Peter ..... fly to San Francisco tomorrow.",
+                        "variants": [
+                            "to going",
+                            "goes to",
+                            "is going to",
+                            "go to"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["is going to"]
+                    },
+                    {
+                        "questionText": "He plays soccer .....",
+                        "variants": [
+                            "on Wednesdays",
+                            "in Wednesdays",
+                            "at Wednesdays",
+                            "by Wednesdays"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["on Wednesdays"]
+                    },
+                    {
+                        "questionText": ".... some more coffee?",
+                        "variants": [
+                            "Do you?",
+                            "Do you like?",
+                            "You'd like",
+                            "Would you like?"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["Would you like?"]
+                    },
+                    {
+                        "questionText": "I wanted a green shirt but they only had .....",
+                        "variants": [
+                            "a one white",
+                            "one white",
+                            "a white",
+                            "a white one"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["a white one"]
+                    },
+                    {
+                        "questionText": "He ..... never been to America.",
+                        "variants": [
+                            "does",
+                            "has",
+                            "haven't",
+                            "hadn't"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["has"]
+                    },
+                ]
+            },
+            {
+                "header": "Test",
+                "questions": [
+                    {
+                        "questionText": "Choose the right sentence.",
+                        "variants": [
+                            "Richard usually arrives late",
+                            "Richard late arrives usually",
+                            "Richard late usually arrives",
+                            "Richard usually late arrives"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["Richard usually arrives late"]
+                    },
+                    {
+                        "questionText": "The house was empty. There ..... there.",
+                        "variants": [
+                            "wasn't nobody",
+                            "was anybody",
+                            "was somebody",
+                            "was nobody"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["was nobody"]
+                    },
+                    {
+                        "questionText": "If I were rich, I ..... buy a house on the beach.",
+                        "variants": [
+                            "will",
+                            "would",
+                            "should",
+                            "wish"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["would"]
+                    },
+                    {
+                        "questionText": "When she arrived, he .....",
+                        "variants": [
+                            "already left",
+                            "has already left",
+                            "had already left",
+                            "left"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["had already left"]
+                    },
+                    {
+                        "questionText": "I forgot ..... the lights before I left.",
+                        "variants": [
+                            "to turn off",
+                            "put off",
+                            "turning off",
+                            "shot"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["to turn off"]
+                    },
+                    {
+                        "questionText": "By the time you finish the class I .....",
+                        "variants": [
+                            "will have left",
+                            "leave",
+                            "going to leave",
+                            "would left"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["will have left"]
+                    },
+                    {
+                        "questionText": "The room can't be dirty she .....",
+                        "variants": [
+                            "is just clean it.",
+                            "have just cleaned it.",
+                            "just clean it.",
+                            "has just cleaned it."
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["has just cleaned it."]
+                    },
+                    {
+                        "questionText": "He plays soccer, ..... ?",
+                        "variants": [
+                            "don't he?",
+                            "does he?",
+                            "isn't he?",
+                            "doesn't he?"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["doesn't he?"]
+                    },
+                    {
+                        "questionText": "If only I ..... to the party instead of staying at home.",
+                        "variants": [
+                            "went",
+                            "had gone",
+                            "did go",
+                            "have gone"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["had gone"]
+                    },
+                    {
+                        "questionText": "Has Mrs. Smith arrived ..... ?",
+                        "variants": [
+                            "yet",
+                            "still",
+                            "now",
+                            "already"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["yet"]
+                    },
+                ]
+            },
+            {
+                "header": "Test",
+                "questions": [
+                    {
+                        "questionText": "Wendy is ..... Paul to get up now.",
+                        "variants": [
+                            "telling",
+                            "saying",
+                            "saying to",
+                            "telling to"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["telling"]
+                    },
+                    {
+                        "questionText": "Have you sent that letter to Mr. Taylor? Yes, I've ..... done that.",
+                        "variants": [
+                            "still",
+                            "yet",
+                            "already",
+                            "now"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["already"]
+                    },
+                    {
+                        "questionText": "It's no use ..... to him. He doesn't listen.",
+                        "variants": [
+                            "speaking",
+                            "to speak",
+                            "spoke",
+                            "have spoken"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["speaking"]
+                    },
+                    {
+                        "questionText": "This is the girl ..... I met on Thursday.",
+                        "variants": [
+                            "whom",
+                            "which",
+                            "what",
+                            "-----"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["-----"]
+                    },
+                    {
+                        "questionText": "..... is your house from here?",
+                        "variants": [
+                            "How much",
+                            "How long",
+                            "How far",
+                            "How many"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["How far"]
+                    },
+                    {
+                        "questionText": "You can watch TV ..... you like.",
+                        "variants": [
+                            "whenever",
+                            "soon",
+                            "always",
+                            "whatever"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["whenever"]
+                    },
+                    {
+                        "questionText": "This house is quite old. It ..... in 1910.",
+                        "variants": [
+                            "built",
+                            "was built",
+                            "build",
+                            "has built"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["was built"]
+                    },
+                    {
+                        "questionText": "She ..... go to school yesterday.",
+                        "variants": [
+                            "must",
+                            "had to",
+                            "ought to",
+                            "should have"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["had to"]
+                    },
+                    {
+                        "questionText": "That's the ..... of my worries, it'll never happen.",
+                        "variants": [
+                            "fewer",
+                            "less",
+                            "last",
+                            "least"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["least"]
+                    },
+                    {
+                        "questionText": "Don't ..... me. I'll be back late.",
+                        "variants": [
+                            "hope for",
+                            "waiting for",
+                            "expect",
+                            "wait for"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["wait for"]
+                    },
+                ]
+            },
+            {
+                "header": "Test",
+                "questions": [
+                    {
+                        "questionText": "The lady ..... in the corner is my aunt.",
+                        "variants": [
+                            "whose",
+                            "is sitting",
+                            "sits",
+                            "sitting"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["sitting"]
+                    },
+                    {
+                        "questionText": "Choose the right sentence.",
+                        "variants": [
+                            "He used to play chess very often",
+                            "He uses play chess very often",
+                            "He was played chess very often",
+                            "He didn't playing chess very often"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["He used to play chess very often"]
+                    },
+                    {
+                        "questionText": "He doesn't like ..... what to do.",
+                        "variants": [
+                            "told",
+                            "said",
+                            "having said",
+                            "being told"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["being told"]
+                    },
+                    {
+                        "questionText": "I ..... it doesn't rain tomorrow, I'm going for a picnic.",
+                        "variants": [
+                            "wait",
+                            "expect",
+                            "hope",
+                            "wish"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["hope"]
+                    },
+                    {
+                        "questionText": "I thought you .....",
+                        "variants": [
+                            "will come to the party",
+                            "were coming to the party",
+                            "come to the party",
+                            "have come to the party"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["were coming to the party"]
+                    },
+                    {
+                        "questionText": "He remembers being ..... to the fair as a child.",
+                        "variants": [
+                            "visited",
+                            "brought",
+                            "taken",
+                            "shown"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["taken"]
+                    },
+                    {
+                        "questionText": "Finishing a course is always .....",
+                        "variants": [
+                            "satisfying",
+                            "satisfaction",
+                            "satisfies",
+                            "satisfied"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["satisfying"]
+                    },
+                    {
+                        "questionText": "She worked hard yesterday and ..... finish everything.",
+                        "variants": [
+                            "can",
+                            "was able to",
+                            "is hard",
+                            "let"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["was able to"]
+                    },
+                    {
+                        "questionText": "",
+                        "variants": [
+                            "Ask her when will be ready the food",
+                            "Ask her when the food will be ready",
+                            "Ask her when will the food ready be",
+                            "Ask her when will be the food ready"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["Ask her when the food will be ready"]
+                    },
+                    {
+                        "questionText": "Choose the right sentence.",
+                        "variants": [
+                            "That's a little beige British proud bulldog",
+                            "That's a proud beige little British bulldog",
+                            "That's a little proud beige British bulldog",
+                            "That's a proud little beige British bulldog"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["That's a proud little beige British bulldog"]
+                    },
+                ]
+            },
+            {
+                "header": "Test",
+                "questions": [
+                    {
+                        "questionText": "I wish I ..... a car, I'm tired of catching the bus.",
+                        "variants": [
+                            "have",
+                            "had",
+                            "would have",
+                            "had had"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["had"]
+                    },
+                    {
+                        "questionText": "Peter can eat ..... as twenty oranges in one sitting.",
+                        "variants": [
+                            "so many",
+                            "so much",
+                            "as many",
+                            "as much"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["as much"]
+                    },
+                    {
+                        "questionText": "I know he didn't thank you, but he .... have done so.",
+                        "variants": [
+                            "should",
+                            "may",
+                            "must",
+                            "would"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["should"]
+                    },
+                    {
+                        "questionText": "I won't go to the cinema ..... you come with me.",
+                        "variants": [
+                            "except",
+                            "otherwise",
+                            "unless",
+                            "therefore"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["unless"]
+                    },
+                    {
+                        "questionText": "He wrote the letter ..... , he didn't need anybody's help.",
+                        "variants": [
+                            "on his own",
+                            "by his own",
+                            "on himself",
+                            "by his ownership"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["on his own"]
+                    },
+                    {
+                        "questionText": "Hotel rooms must be ..... by noon.",
+                        "variants": [
+                            "vacated",
+                            "evacuated",
+                            "abandoned",
+                            "leave"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["vacated"]
+                    },
+                    {
+                        "questionText": "You can take the book with you ..... you give it back.",
+                        "variants": [
+                            "as well as",
+                            "as time as",
+                            "as far as",
+                            "as long as"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["as long as"]
+                    },
+                    {
+                        "questionText": "Let's go watch the game, .....",
+                        "variants": [
+                            "will we?",
+                            "shall we?",
+                            "let us?",
+                            "don't we?"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["shall we?"]
+                    },
+                    {
+                        "questionText": "I need to finish this ..... Friday.",
+                        "variants": [
+                            "during",
+                            "by",
+                            "until",
+                            "at"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["until"]
+                    },
+                    {
+                        "questionText": "After many years of research, they found the solution .....",
+                        "variants": [
+                            "at the end",
+                            "at last",
+                            "by the end",
+                            "on the end"
+                        ],
+                        "questionType": "variants-single",
+                        "rightAnswers": ["at last"]
+                    }
+                ]
+            },
+        ]
+        window.__isTestMode__ = true;
+    </script>
+</head>
+
+<body>
+    <div id="quiz"></div>
+</body>
+
+</html>

@@ -47,7 +47,10 @@ const createTextInBlank = (questionData, parentElem, callback) =>{
   }
 }
 
-export const createQuestion = (questionData, parentElem, callback) =>{
+export const createQuestion = (questionData, parentElem, callback, testMode=false) =>{
+  if(testMode && questionData.questionType !== 'variants-single'){
+    throw new Error(`test mode is enabled, but question' type is ${questionData.questionType }`)
+  }
   switch(questionData.questionType){
     case 'simple-text':
       return new SimpleTextQuestion(questionData, parentElem, callback);
@@ -67,7 +70,7 @@ export const createQuestion = (questionData, parentElem, callback) =>{
         questionData.variants = quesVariants.split('||');
       }
 
-      return new SingleVariantQuestion(questionData, parentElem, callback);
+      return new SingleVariantQuestion(questionData, parentElem, callback, testMode);
       //return new TextInBlankQuestion(questionData, parentElem, callback);
   }
 }

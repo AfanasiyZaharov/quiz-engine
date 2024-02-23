@@ -6,12 +6,16 @@ export default class Section{
   rendered = false;
   completed = false;
 
-  constructor(sectionData, container, allRightCallBack, number, sectionsLength){
+  constructor(sectionData, container, allRightCallBack, number, testMode=false){
     this.header = sectionData.header;
     this.number = number;
     this.container = container;
     this.questions = sectionData.questions;
     this.allRightCallBack = allRightCallBack;
+    this.testMode = testMode
+    if(testMode){
+      this.completed = true
+    }
   }
 
   hideSection(){
@@ -23,6 +27,9 @@ export default class Section{
   }
 
   checkCorrect = () =>{
+    // if(this.testMode){
+    //   return
+    // }
     for(let i = 0; i < this.convertedQuestions.length; i++){
       this.convertedQuestions[i].check(false);
     }
@@ -62,8 +69,7 @@ export default class Section{
     this.container.insertAdjacentHTML('beforeend', html);
     this.sectionContainer = this.container.querySelector(`.section-${this.number}`);
     this.convertedQuestions = [new TextBeforeQuestion(this.header, this.sectionContainer), ...this.questions.map((question)=>{
-      // return new Question(question, this.questionsContainer);
-      return createQuestion(question, this.sectionContainer, this.questionCallback);
+      return createQuestion(question, this.sectionContainer, this.questionCallback, this.testMode);
     })];
     this.rendered = true;
 

@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [{
         test: /\.m?js$/,

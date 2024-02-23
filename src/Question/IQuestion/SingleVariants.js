@@ -17,6 +17,10 @@ export default class SingleVariantQuestion extends IQuestion {
   }
 
   changeListener = (e) => {
+
+    if(this.testMode){
+      return 
+    }
     if (!this.inputs.includes(e.target)) {
       this.check();
       window.document.removeEventListener('change', this.changeListener);
@@ -47,7 +51,7 @@ export default class SingleVariantQuestion extends IQuestion {
 
   certainCheck = (userAnswer) => {
     const { rightAnswers } = this.questionData;
-    return compareTwo(rightAnswers[0], userAnswer);
+    return compareTwo(userAnswer, rightAnswers[0]);
   }
 
 }

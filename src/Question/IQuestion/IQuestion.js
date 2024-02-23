@@ -2,7 +2,7 @@ import uid from '../../_utils/uid';
 import { validateErrorText } from '../templates';
 
 export default class IQuestion {
-  constructor(questionData, parentElem, checkCallback) {
+  constructor(questionData, parentElem, checkCallback, testMode=false) {
     this.questionData = questionData;
     this.parentElem = parentElem;
     this.id = uid();
@@ -11,6 +11,7 @@ export default class IQuestion {
     this.firstTimeCorrect = false;
     this.input = null;
     this.checkCallback = checkCallback;
+    this.testMode = testMode
   }
 
   hide = () => {
@@ -53,10 +54,19 @@ export default class IQuestion {
     this.hintButton = this.mainElement.querySelector('.hint-sign');
     this.hintButton.style.display = 'none';
     this.hintContainer = this.mainElement.querySelector('.hint-container');
+    this.checkSignContainer = this.mainElement.querySelector('.check-sign');
+    console.log('testMode', this.testMode)
+    if(this.testMode){
+      this.hintButton.style.display='none';
+      this.checkSignContainer.style.display='none';
+    }
     this.baseAddListeners();
   }
 
   showHints = () => {
+    if(this.testMode){
+      return false
+    }
     if (!this.errorsContainer) {
       const { rightAnswers } = this.questionData;
       const html = validateErrorText(rightAnswers);
@@ -75,6 +85,9 @@ export default class IQuestion {
   }
 
   baseAddListeners = () => {
+    if(this.testMode){
+      return;
+    }
     const inputs = this.mainElement.querySelectorAll('input');
     if (inputs.length === 1) {
       this.mainElement.querySelector('input').addEventListener('keydown', (e) => { if(e.code === "Enter") {this.check();} });

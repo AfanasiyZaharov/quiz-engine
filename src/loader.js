@@ -114,3 +114,20 @@ var MathMagic = {
     return a+b*this.multiplier;
   }
 }
+
+
+
+const allAnswers = document.querySelectorAll('.answer');
+const resultData = []
+for(let i = 0; i<allAnswers.length; i++){
+  const result = {}
+  const ans = allAnswers[i];
+  result.text = ans.querySelector('.answer_title').innerText
+
+  const allVariants = ans.querySelector('.answer_request').querySelectorAll('.answer-text')
+  result.variants = [...allVariants].map((elem)=>elem.innerText)
+  resultData.push(result)
+}
+
+console.log(resultData)
+console.log(JSON.stringify(resultData))

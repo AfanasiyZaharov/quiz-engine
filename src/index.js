@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   start.addEventListener('click', ()=>{
     container.removeChild(button);
-    new QuizController(window.testData, container);
+    new QuizController(window.testData, container, window.__isTestMode__ || false);
   });
 
 
