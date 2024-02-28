@@ -1,5 +1,6 @@
 
 import Section from './Section';
+import { ProgressBar } from './ProgressBar';
 class QuizController {
 
   questions = [];
@@ -10,6 +11,7 @@ class QuizController {
     this.sections = sections;
     this.maxSectionNumber = sections.length - 1;
     this.testMode = testMode
+
     if (this.maxSectionNumber === 0) {
       this.isLastSection = true;
     }
@@ -19,6 +21,10 @@ class QuizController {
     this.convertedSections = sections.map((section, index) => {
       return new Section(section, this.questionsContainer, this.renderNextSectionButton, index, testMode);
     });
+
+    if(testMode){
+      this.progressBar = new ProgressBar(document.querySelector('.progressBarContainer'), sections.length);
+    }
 
     // this.currentSection = 0;
     this.changeSection(0);
@@ -34,6 +40,7 @@ class QuizController {
     this.convertedSections[sectionNumber].renderSection();
 
     this.numberTextContainer.innerText = `Section ${sectionNumber + 1} of ${this.convertedSections.length}`;
+    this.progressBar.setSection(sectionNumber)
 
   }
 
@@ -82,6 +89,7 @@ class QuizController {
 
     const html = `
     <div class = "questions-list"> </div>
+    <div class="progressBarContainer"></div>
     <div id="number-container"></div>
     <div class="button-container">
       <button class="button" id="prev-section">Prev Section</button> 
@@ -139,6 +147,7 @@ class QuizController {
   renderEndOfTest = () =>{
     this.questionsContainer.style.display = 'none';
     this.numberTextContainer.style.display = 'none';
+    this.progressBar.hide()
     this.parentElement.querySelector('.button-container').style.display = 'none';
 
     this.convertedSections.forEach((section)=>{
@@ -163,22 +172,22 @@ class QuizController {
 
     let resultLevel = 'A0'
 
-    if(correctCount >= 10){
+    if(correctCount >= 7){
       resultLevel = 'A1'
     }
-    if(correctCount >= 20){
+    if(correctCount >= 14){
       resultLevel = 'A2'
     }
-    if(correctCount >= 25){
+    if(correctCount >= 22){
       resultLevel = 'B1'
     }
-    if(correctCount >= 35){
+    if(correctCount >= 30){
       resultLevel = 'B2'
     }
-    if(correctCount >= 42){
+    if(correctCount >= 38){
       resultLevel = 'C1'
     }
-    if(correctCount >= 47){
+    if(correctCount >= 45){
       resultLevel = 'C2'
     }
 
