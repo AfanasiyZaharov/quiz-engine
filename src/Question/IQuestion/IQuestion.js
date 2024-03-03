@@ -55,7 +55,6 @@ export default class IQuestion {
     this.hintButton.style.display = 'none';
     this.hintContainer = this.mainElement.querySelector('.hint-container');
     this.checkSignContainer = this.mainElement.querySelector('.check-sign');
-    console.log('testMode', this.testMode)
     if(this.testMode){
       this.hintButton.style.display='none';
       this.checkSignContainer.style.display='none';

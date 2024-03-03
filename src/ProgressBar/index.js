@@ -6,7 +6,8 @@ export class ProgressBar{
 
         this.elem = document.createElement('div');
         this.elem.className = 'progressElemBG';
-        this.elem.style.width = '800px';
+        this.mainWidth = container.getBoundingClientRect().width
+        this.elem.style.width = `${this.mainWidth}px`
 
         this.container.appendChild(this.elem)
 
@@ -21,8 +22,11 @@ export class ProgressBar{
     }
 
     setSection(sectionNumber){
-        console.log('call section', sectionNumber)
-        let width = (800 - ((this.maxSections-1)* 5))  / this.maxSections;
+
+        this.mainWidth = this.container.getBoundingClientRect().width
+        this.elem.style.width = `${this.mainWidth}px`
+
+        let width = (this.mainWidth - ((this.maxSections)* 5))  / this.maxSections;
         let allElems = this.elem.querySelectorAll('.progressElem')
         allElems.forEach(elem =>{
             let elemSectionNumber = elem.getAttribute('sectionNumber')

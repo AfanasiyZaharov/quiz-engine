@@ -7,7 +7,7 @@ class QuizController {
   convertedQuestions = [];
   oldQuestions = [];
 
-  constructor(sections = [], parentElement, testMode=false) {
+  constructor(sections = [], parentElement, testMode = false) {
     this.sections = sections;
     this.maxSectionNumber = sections.length - 1;
     this.testMode = testMode
@@ -22,14 +22,14 @@ class QuizController {
       return new Section(section, this.questionsContainer, this.renderNextSectionButton, index, testMode);
     });
 
-    if(testMode){
+    if (testMode) {
       this.progressBar = new ProgressBar(document.querySelector('.progressBarContainer'), sections.length);
     }
 
     // this.currentSection = 0;
     this.changeSection(0);
 
-    if(testMode){
+    if (testMode) {
       this.renderNextSectionButton()
     }
   }
@@ -41,6 +41,15 @@ class QuizController {
 
     this.numberTextContainer.innerText = `Section ${sectionNumber + 1} of ${this.convertedSections.length}`;
     this.progressBar.setSection(sectionNumber)
+    setTimeout(() => {
+      if (this.parentElement.getBoundingClientRect().top) {
+        window.scrollTo({
+          top: this.parentElement.getBoundingClientRect().top,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
+    }, 20)
 
   }
 
@@ -54,7 +63,7 @@ class QuizController {
     } else {
       this.prevButton.style.display = 'none';
     }
-  
+
     if (sectionNumber > this.currentSection) {
       if (this.maxSectionNumber === sectionNumber) {
         this.isLastSection = true;
@@ -80,7 +89,7 @@ class QuizController {
     }
 
     this.initSection(sectionNumber);
-    if(this.testMode){
+    if (this.testMode) {
       this.renderNextSectionButton()
     }
   }
@@ -101,7 +110,7 @@ class QuizController {
     this.parentElement.insertAdjacentHTML('beforeend', html);
 
     this.checkButton = document.querySelector('#check_button');
-    if(this.testMode){
+    if (this.testMode) {
       this.checkButton.style.display = 'none'
     }
 
@@ -126,16 +135,15 @@ class QuizController {
   }
 
   renderNextSectionButton = () => {
-    console.log('render', this.isLastSection)
     if (!this.isLastSection) {
       this.nextButton.style.display = 'block';
     } else {
       this.endQuizButton.style.display = 'block';
       this.endQuizButton.addEventListener('click', () => {
-        if(this.testMode){
+        if (this.testMode) {
           this.renderEndOfTest()
-          
-        }else{
+
+        } else {
           this.renderCongrats();
         }
 
@@ -144,16 +152,16 @@ class QuizController {
 
   }
 
-  renderEndOfTest = () =>{
+  renderEndOfTest = () => {
     this.questionsContainer.style.display = 'none';
     this.numberTextContainer.style.display = 'none';
     this.progressBar.hide()
     this.parentElement.querySelector('.button-container').style.display = 'none';
 
-    this.convertedSections.forEach((section)=>{
+    this.convertedSections.forEach((section) => {
       section.checkCorrect()
     });
-    
+
     let allQuestions = [];
     for (let i = 0; i < this.convertedSections.length; i++) {
 
@@ -168,39 +176,43 @@ class QuizController {
 
     correctCount = correctCount - this.sections.length;
 
-    console.log(`result: ${correctCount} out of ${allQuestionsLength}`)
+    let resultLevel = 'BEGINNER (A0)'
 
-    let resultLevel = 'A0'
-
-    if(correctCount >= 7){
-      resultLevel = 'A1'
+    if (correctCount >= 7) {
+      resultLevel = 'ELEMENTARY (A1)'
     }
-    if(correctCount >= 14){
-      resultLevel = 'A2'
+    if (correctCount >= 14) {
+      resultLevel = 'PRE-INTERMEDIATE (A2)'
     }
-    if(correctCount >= 22){
-      resultLevel = 'B1'
+    if (correctCount >= 22) {
+      resultLevel = 'INTERMEDIATE (B1)'
     }
-    if(correctCount >= 30){
-      resultLevel = 'B2'
+    if (correctCount >= 30) {
+      resultLevel = 'UPPER INTERMEDIATE (B2)'
     }
-    if(correctCount >= 38){
-      resultLevel = 'C1'
+    if (correctCount >= 38) {
+      resultLevel = 'ADVANCED (C1)'
     }
-    if(correctCount >= 45){
-      resultLevel = 'C2'
+    if (correctCount >= 45) {
+      resultLevel = 'PROFICIENT (C2)'
     }
 
     const html = `
       <div class="last-message">
         <div class="message">
-          Grats, you have completed the test!
+          The test is completed!
+        </div>
+        <div class="message got">
+          You got:
         </div>
         <div class="message">
-        You got ${correctCount} out of ${allQuestionsLength}
+          <b>${correctCount}</b> correct answers out of <b>${allQuestionsLength}</b>
         </div>
         <div class="message">
-        Your level is ${resultLevel}
+          Your level:
+        </div>
+        <div class="message">
+          <b>${resultLevel}</b>
         </div>
       </div>
     `;

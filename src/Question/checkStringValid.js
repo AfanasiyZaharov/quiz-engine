@@ -68,7 +68,6 @@ export const validateSimpleText = (userAnswer, rightAnswers) => {
   let userAnswersPossibilities;
   if (!removePossibilities) {
     userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
-    console.log('userAnswer', userAnswersPossibilities);
   } else {
     userAnswersPossibilities = [userAnswer];
   }
@@ -133,7 +132,6 @@ let findShorteningsPossibilities = (userAnswer) => {
       }
     }
   }
-  console.log('fdsfsd', textVariants, findMaxPrevious(textVariants, 999));
   // for one shortening.
   if (findMaxPrevious(textVariants, 999)) {
     return textVariants[findMaxPrevious(textVariants, 999)].map((variant) => variant.join(' '));
@@ -161,7 +159,6 @@ export const validateTextInBlank = (userAnswer, rightAnswers, questionText) => {
 }
 
 export const validateMultiBlanks = (userAnswers, rightAnswers) => {
-  console.log('user', userAnswers, rightAnswers);
   let validIndexes = [];
   let isAllValid = false;
   if (userAnswers.length > rightAnswers.length) {
@@ -201,7 +198,6 @@ export const validateMultiBlanks = (userAnswers, rightAnswers) => {
     }
   }
 
-  console.log('globalVa', globalVA);
 
   if (globalVA.isOneTimeValid) {
     return {
