@@ -1,19 +1,19 @@
 
 body{
   background-color: rgb(239, 238, 233);
-  // background-image: url(https://ucarecdn.com/043a20be-635c-4622-81f1-5046155e47a8/);
+  background-image: url('https://ucarecdn.com/6cad0d8f-4ac1-47a8-aa26-6fc14b6b6d56/');
   background-attachment: fixed;
   background-position: center;
 }
 
 
-@media screen and (max-aspect-ratio: 9/16) {
-  body {
-    background-image: url('https://ucarecdn.com/6cad0d8f-4ac1-47a8-aa26-6fc14b6b6d56/');
-  }
-}
+// @media screen and (max-aspect-ratio: 9/16) {
+//   body {
+//     background-image: url('https://ucarecdn.com/6cad0d8f-4ac1-47a8-aa26-6fc14b6b6d56/');
+//   }
+// }
 
-@media screen and (min-aspect-ratio: 16/9) {
+@media screen and (min-aspect-ratio: 1.2) {
   body {
     background-image: url('https://ucarecdn.com/1442c086-f2b8-4ae5-9867-3198b758587f/');
   }
