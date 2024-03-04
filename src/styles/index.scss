@@ -295,12 +295,12 @@ div.question .answer-text-input.in-blank.correct{
 }
 
 .progressElemBG{
-  height: 25px;
+  height: 10px;
   display: flex;
 
   .progressElem{
     width: 0px;
-    height: 25px;
+    height: 10px;
     background-color: 	#282828;
     transition: width 0.4s, background-color 0.4s;
     margin-left: 5px;
@@ -314,7 +314,7 @@ div.question .answer-text-input.in-blank.correct{
 
   .progressElemLast{
     width: 0px;
-    height: 25px;
+    height: 10px;
     background-color:gray
   }
 }
