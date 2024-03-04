@@ -323,3 +323,14 @@ div.question .answer-text-input.in-blank.correct{
   margin-top: 5px;
   margin-left: 5px;
 }
+
+.start-text{
+  .start-text-elem{
+    text-align: center;
+    margin: 30px 0px;
+    font-size: 25px;
+    &:last-child{
+      margin-bottom: 50px;
+    }
+  }
+}

@@ -55,13 +55,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
   
   appendStyles();
 
-  const html = `<button class="button" id="start">Start</button>`
+  const html = `
+    <div id="start-elem" class="start-text">
+      <div class="start-text-elem">English level test</div>
+      <div class="start-text-elem">50 questions</div>
+    </div>
+  
+  <button class="button" id="start">Start</button>`
   const container = document.querySelector('#quiz');
   container.insertAdjacentHTML('beforeend', html);
   const button = container.querySelector('#start');
+  const elem = container.querySelector('#start-elem');
 
-  start.addEventListener('click', ()=>{
+  button.addEventListener('click', ()=>{
     container.removeChild(button);
+    container.removeChild(elem);
+    
     new QuizController(window.testData, container, window.__isTestMode__ || false);
   });
 
