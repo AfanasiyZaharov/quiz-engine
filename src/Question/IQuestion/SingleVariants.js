@@ -1,6 +1,7 @@
 import { questionTemplate, validateErrorText } from '../templates';
 import { validateSimpleText, validateTextInBlank, compareTwo } from '../checkStringValid';
 import IQuestion from './IQuestion';
+import { Storage } from '../../_utils/Storage';
 
 export default class SingleVariantQuestion extends IQuestion {
 
@@ -18,8 +19,10 @@ export default class SingleVariantQuestion extends IQuestion {
 
   changeListener = (e) => {
 
-    if(this.testMode){
-      return 
+    if (this.testMode) {
+      const selected = this.mainElement.querySelector(`input[name="${this.questionData.questionText}"]:checked`);
+      Storage.write(this.sectionIndex, this.questionIndex, selected ? selected.value : undefined);
+      return
     }
     if (!this.inputs.includes(e.target)) {
       this.check();

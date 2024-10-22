@@ -13,7 +13,7 @@ export default class MultipleTextInBlankQuestions extends IQuestion{
 
   certainCheck = (userAnswer) => {
     const { rightAnswers, questionText } = this.questionData;
-    const {correct, correctIndexes} =  validateMultiBlanks(userAnswer, rightAnswers, questionText);
+    const {correct, correctIndexes} = validateMultiBlanks(userAnswer, rightAnswers, questionText);
     this.correctIndexes = correctIndexes;
     return correct;
   }

@@ -15,10 +15,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         reader.onload = function(event) {
             console.log('File content:', event.target.result);
             let textFileData = event.target.result;
-            // if(textFileData.includes('�')){
-            //   console.log('includes');
-            //   console.log(windows1251.decode(textFileData));
-            // }
+
             console.log('papa ', parser.parse(textFileData))
             createCSVData(textFileData);
         };
@@ -99,21 +96,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
       return resultElem;
     }
 });
-
-
-
-
-function test(a,b){
-  return a + b;
-}
-
-
-var MathMagic = {
-  multiplier: 2,
-  sum: function (a, b){
-    return a+b*this.multiplier;
-  }
-}
 
 
 

@@ -68,8 +68,8 @@ export default class Section{
     `
     this.container.insertAdjacentHTML('beforeend', html);
     this.sectionContainer = this.container.querySelector(`.section-${this.number}`);
-    this.convertedQuestions = [new TextBeforeQuestion(this.header, this.sectionContainer), ...this.questions.map((question)=>{
-      return createQuestion(question, this.sectionContainer, this.questionCallback, this.testMode);
+    this.convertedQuestions = [new TextBeforeQuestion(this.header, this.sectionContainer), ...this.questions.map((question, index)=>{
+      return createQuestion(question, this.sectionContainer, this.questionCallback, this.testMode, this.number, index);
     })];
     this.rendered = true;
 

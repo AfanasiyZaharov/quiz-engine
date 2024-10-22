@@ -1,11 +1,14 @@
-import uid from '../../_utils/uid';
+import { Storage } from '../../_utils/Storage';
+import uid, { stringToHash } from '../../_utils/uid';
 import { validateErrorText } from '../templates';
 
 export default class IQuestion {
-  constructor(questionData, parentElem, checkCallback, testMode=false) {
+  constructor(questionData, parentElem, checkCallback, testMode = false, sectionIndex, questionIndex) {
     this.questionData = questionData;
     this.parentElem = parentElem;
-    this.id = uid();
+    this.id = `id-${stringToHash(`${sectionIndex}-${questionIndex}`)}`;
+    this.sectionIndex = sectionIndex;
+    this.questionIndex = questionIndex;
     this.resultCorrect = false;
     this.checkInitialized = false;
     this.firstTimeCorrect = false;
@@ -46,7 +49,14 @@ export default class IQuestion {
   }
 
   renderQuestion() {
-    const html = this.questionTemplate(this.questionData, this.id);
+
+    let selectedAnswer;
+    if(this.testMode){
+      selectedAnswer = Storage.read(this.sectionIndex, this.questionIndex);
+    }
+
+
+    const html = this.questionTemplate(this.questionData, this.id, selectedAnswer);
     this.parentElem.insertAdjacentHTML('beforeend', html);
     const mainElement = this.parentElem.querySelector(`#${this.id}`);
     this.mainElement = mainElement;
@@ -55,15 +65,15 @@ export default class IQuestion {
     this.hintButton.style.display = 'none';
     this.hintContainer = this.mainElement.querySelector('.hint-container');
     this.checkSignContainer = this.mainElement.querySelector('.check-sign');
-    if(this.testMode){
-      this.hintButton.style.display='none';
-      this.checkSignContainer.style.display='none';
+    if (this.testMode) {
+      this.hintButton.style.display = 'none';
+      this.checkSignContainer.style.display = 'none';
     }
     this.baseAddListeners();
   }
 
   showHints = () => {
-    if(this.testMode){
+    if (this.testMode) {
       return false
     }
     if (!this.errorsContainer) {
@@ -84,12 +94,12 @@ export default class IQuestion {
   }
 
   baseAddListeners = () => {
-    if(this.testMode){
+    if (this.testMode) {
       return;
     }
     const inputs = this.mainElement.querySelectorAll('input');
     if (inputs.length === 1) {
-      this.mainElement.querySelector('input').addEventListener('keydown', (e) => { if(e.code === "Enter") {this.check();} });
+      this.mainElement.querySelector('input').addEventListener('keydown', (e) => { if (e.code === "Enter") { this.check(); } });
     }
     this.mainElement.querySelector('.check-sign').addEventListener('click', this.check);
     this.hintButton.addEventListener('click', this.showHints);
