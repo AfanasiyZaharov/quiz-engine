@@ -36,7 +36,7 @@ modules:
 
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
   // inject styles to page
   const appendStyles = () => {
@@ -47,19 +47,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
     styleElem.innerHTML = scss;
 
     const script = document.createElement('script');
-    script.src="https://kit.fontawesome.com/1745ac394a.js";
+    script.src = "https://kit.fontawesome.com/1745ac394a.js";
 
     head.appendChild(styleElem);
     head.appendChild(script);
   }
-  
+
   appendStyles();
 
   const html = `
-    <div id="start-elem" class="start-text">
+    ${window.__isTestMode__ ? `<div id="start-elem" class="start-text">
       <div class="start-text-elem">English level test</div>
       <div class="start-text-elem">50 questions</div>
-    </div>
+    </div>` : ''}
   
   <button class="button" id="start">Start</button>`
   const container = document.querySelector('#quiz');
@@ -67,10 +67,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const button = container.querySelector('#start');
   const elem = container.querySelector('#start-elem');
 
-  button.addEventListener('click', ()=>{
+  button.addEventListener('click', () => {
     container.removeChild(button);
-    container.removeChild(elem);
-    
+    if(elem){
+      container.removeChild(elem);
+    }
+
+
     new QuizController(window.testData, container, window.__isTestMode__ || false);
   });
 

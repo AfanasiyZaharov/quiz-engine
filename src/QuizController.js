@@ -40,7 +40,10 @@ class QuizController {
     this.convertedSections[sectionNumber].renderSection();
 
     this.numberTextContainer.innerText = `Section ${sectionNumber + 1} of ${this.convertedSections.length}`;
-    this.progressBar.setSection(sectionNumber)
+    if (this.progressBar) {
+      this.progressBar.setSection(sectionNumber)
+    }
+
     setTimeout(() => {
       if (this.parentElement.getBoundingClientRect().top) {
         window.scrollTo({
@@ -155,7 +158,10 @@ class QuizController {
   renderEndOfTest = () => {
     this.questionsContainer.style.display = 'none';
     this.numberTextContainer.style.display = 'none';
-    this.progressBar.hide()
+    if(this.progressBar){
+      this.progressBar.hide()
+    }
+
     this.parentElement.querySelector('.button-container').style.display = 'none';
 
     this.convertedSections.forEach((section) => {

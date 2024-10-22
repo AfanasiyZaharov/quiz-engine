@@ -20,6 +20,7 @@ export default class SimpleTextQuestion extends IQuestion{
   }
 
   changeHandler  = (el) =>{
+
     const userValue = el.target.value;
     this.userValue = userValue;
     this.check(userValue);

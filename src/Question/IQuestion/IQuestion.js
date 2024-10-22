@@ -22,6 +22,7 @@ export default class IQuestion {
   }
 
   check = (shouldCallBack = true) => {
+    console.log('call check')
     const answer = this.getAnswer();
     const result = this.certainCheck(answer);
     if (!this.checkInitialized) {
@@ -101,6 +102,7 @@ export default class IQuestion {
     if (inputs.length === 1) {
       this.mainElement.querySelector('input').addEventListener('keydown', (e) => { if (e.code === "Enter") { this.check(); } });
     }
+    console.log('added', this.questionData, this.mainElement.querySelector('.check-sign'));
     this.mainElement.querySelector('.check-sign').addEventListener('click', this.check);
     this.hintButton.addEventListener('click', this.showHints);
   }

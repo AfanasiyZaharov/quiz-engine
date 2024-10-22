@@ -39,11 +39,11 @@ export class TextBeforeQuestion{
 }
 
 
-const createTextInBlank = (questionData, parentElem, callback) =>{
+const createTextInBlank = (questionData, parentElem, callback, sectionIndex, questionIndex) =>{
   if(questionData.questionText.match(/_+/g).length > 1){
-    return new MultiTextInBlankQuestion(questionData, parentElem, callback);
-  }else{
-    return new TextInBlankQuestion(questionData, parentElem, callback);
+    return new MultiTextInBlankQuestion(questionData, parentElem, callback, false, sectionIndex, questionIndex);
+  }else {
+    return new TextInBlankQuestion(questionData, parentElem, callback, false, sectionIndex, questionIndex);
   }
 }
 
@@ -51,13 +51,14 @@ export const createQuestion = (questionData, parentElem, callback, testMode=fals
   if(testMode && questionData.questionType !== 'variants-single'){
     throw new Error(`test mode is enabled, but question' type is ${questionData.questionType }`)
   }
+  console.log('qies', questionData);
   switch(questionData.questionType){
     case 'simple-text':
-      return new SimpleTextQuestion(questionData, parentElem, callback);
+      return new SimpleTextQuestion(questionData, parentElem, callback, false, sectionIndex, questionIndex);
     case 'text-in-blank':
-      return createTextInBlank(questionData, parentElem, callback)
+      return createTextInBlank(questionData, parentElem, callback, sectionIndex, questionIndex)
     case 'variants-multi':
-      return new MultiVariantsQuestion(questionData, parentElem, callback);
+      return new MultiVariantsQuestion(questionData, parentElem, callback, false, sectionIndex, questionIndex);
     case 'variants-single':
       let quesVariants;
       if(questionData['variants\r'] ){
