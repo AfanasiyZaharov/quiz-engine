@@ -36,7 +36,7 @@ export const questionTemplate = (questionData, id, alreadyWrittenAnswer) => {
     const width = calculateWidth(questionData.rightAnswers);
     return `
     <div class = "question in-blank" id="${id}">
-      <div class="question-text">${splitted.join(`${answerTemplateInBlank(answerTemplateInBlank, width)}`)}</div>
+      <div class="question-text">${splitted.join(`${answerTemplateInBlank(undefined, width)}`)}</div>
       <div class="check-sign"><i class="fas fa-sign-in-alt"></i></div>
       <div class="hint-sign"><i class="far fa-question-circle"></i></div>
       <div class="hint-container"></div>
@@ -70,7 +70,7 @@ export const answerTemplate = (questionData, id, alreadyWrittenAnswer) => {
   if (questionData.questionType === 'simple-text' || questionData.questionType === 'text-in-blank') {
     return `
       <div class = "answer-text">
-        <input class = "answer-text-input " />
+        <input value="${alreadyWrittenAnswer || ''}" class = "answer-text-input " />
       </div>
     `;
   }

@@ -111,28 +111,28 @@ body{
 
 .question.correct{
   border: 1px solid #28a745;
-  background-color: rgba(40,167,69,0.2);
+  background-color: rgba(40,167,69,0.6);
 }
 
 .question.incorrect{
   border: 1px solid #dc3545;
-  background-color: rgba(220, 53, 69, 0.2);
+  background-color: rgba(220, 53, 69, 0.6);
 }
 
 .question.incorrect .answer-text-input.in-blank{
-  background-color: rgba(220, 53, 69, 0.5);
+  background-color: rgba(220, 53, 69, 0.8);
 }
 
 .question .answer-text-input.in-blank.incorrect{
-  background-color: rgba(220, 53, 69, 0.5);
+  background-color: rgba(220, 53, 69, 0.8);
 }
 
 div.question.correct .answer-text-input.in-blank{
-  background-color: rgba(40, 167, 69, 0.5);
+  background-color: rgba(40, 167, 69, 0.8);
 }
 
 div.question .answer-text-input.in-blank.correct{
-  background-color: rgba(40, 167, 69, 0.5);
+  background-color: rgba(40, 167, 69, 0.8);
 }
 
 .checkbox-container{

@@ -158,7 +158,7 @@ class QuizController {
   renderEndOfTest = () => {
     this.questionsContainer.style.display = 'none';
     this.numberTextContainer.style.display = 'none';
-    if(this.progressBar){
+    if (this.progressBar) {
       this.progressBar.hide()
     }
 
