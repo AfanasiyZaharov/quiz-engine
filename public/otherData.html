@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz example</title>
+    <script src="../dist/app.js"></script>
+    <!-- <script src="https://od.lk/f/ODJfNDkyMTIwMTFf/app.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./index.css"/> -->
+    <script src="https://kit.fontawesome.com/1745ac394a.js" crossorigin="anonymous"></script>
+    <script>
+        window.__no_ignore_punctuation = true;
+        window.testData = [{
+            "header": "Mission 3.12.1 Select the sentence which matches the situation.",
+            "questions": [{
+                "questionType": "variants-single",
+                "questionText": " I have three umbrellas. I bought one of them in Paris. That one needs repairing.",
+                "rightAnswers": ["The umbrella which I bought in Paris needs repairing."],
+                "variants": ["The umbrella which I bought in Paris needs repairing.", "The umbrella, which I bought in Paris, needs repairing."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "I have one colleague. He works extremely hard. He has few friends.",
+                "rightAnswers": ["My colleague, who works extremely hard, is not very popular."],
+                "variants": ["My colleague who works extremely hard is not very popular.", "My colleague, who works extremely hard, is not very popular."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "I have several aunts. One works in New York. She’s getting married.",
+                "rightAnswers": ["My aunt who works in New York is getting married."],
+                "variants": ["My aunt who works in New York is getting married.", "My aunt, who works in New York, is getting married."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "Peter made some sandwiches. They have all been eaten. You made some too. Your sandwiches have not been eaten.",
+                "rightAnswers": ["The sandwiches which Peter made have all been eaten."],
+                "variants": ["The sandwiches which Peter made have all been eaten.", "The sandwiches, which Peter made, have all been eaten."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "There was only one park in this town. Someone has built it over. We used to play in the park when we were children.",
+                "rightAnswers": ["The local park, where we played as children, has been built over."],
+                "variants": ["The local park where we played as children has been built over.", "The local park, where we played as children, has been built over."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "One of my French teachers helps me with my homework. The other one lives too far away.",
+                "rightAnswers": ["The French teacher whose house is near mine helps me with my homework."],
+                "variants": ["The French teacher whose house is near mine helps me with my homework.", "The French teacher, whose house is near mine, helps me with my homework."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "You met one of my cousins last summer, the one from the U.S. He’s coming to stay again.",
+                "rightAnswers": ["My American cousin, who you met last summer, is coming to stay again."],
+                "variants": ["My American cousin who you met last summer is coming to stay again.", "My American cousin, who you met last summer, is coming to stay again."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "There were a lot of candidates in the presidential election. Three of them were women. The winner was one of them. She had campaigned for better housing conditions.",
+                "rightAnswers": ["The woman who had campaigned for better housing conditions has been elected president."],
+                "variants": ["The woman who had campaigned for better housing conditions has been elected president.", "The woman, who had campaigned for better housing conditions, has been elected president."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "I received lots of flowers when I was ill, but only my boyfriend sent me roses. I put the roses in my favourite vase.",
+                "rightAnswers": ["The roses, which my boyfriend sent, look beautiful in my favourite vase."],
+                "variants": ["The roses which my boyfriend sent look beautiful in my favourite vase.", "The roses, which my boyfriend sent, look beautiful in my favourite vase."]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "I took two cameras away with me. You lent me one of them. That’s the one that got broken.",
+                "rightAnswers": ["The camera which you lent me has been broken."],
+                "variants": ["The camera which you lent me has been broken.", "The camera, which you lent me, has been broken."]
+            }]
+        }, {
+            "header": "Mission 3.12.2 What goes here? A comma, a colon, a dash or no punctuation?",
+            "questions": [{
+                "questionType": "variants-multi",
+                "questionText": "We need three kinds of support[_] economic, moral and political.",
+                "rightAnswers": ["colon"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "If you are ever in London[_] come and see us.",
+                "rightAnswers": ["comma"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "Come and see us[_] if you are ever in London.",
+                "rightAnswers": ["no punctuation"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "We decided not to go on holiday[_] we had too little money.",
+                "rightAnswers": ["colon"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "The cowboy was tall[_] dark and handsome.",
+                "rightAnswers": ["comma"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "This is an expensive, ill-planned[_] wasteful project.",
+                "rightAnswers": ["comma"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "HAMLET[_] To be, or not to be...",
+                "rightAnswers": ["colon"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }, {
+                "questionType": "variants-multi",
+                "questionText": "There are three things I can never remember[_] names, faces, and I can't remember the third thing.",
+                "rightAnswers": ["colon", "dash"],
+                "variants": ["comma", "colon", "dash", "no punctuation"]
+            }]
+        }, {
+            "header": "Mission 3.12.3 Is the punctuation right or wrong?",
+            "questions": [{
+                "questionType": "variants-single",
+                "questionText": " It is a fine idea; let us hope that it is going to work.",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "The blue dress was warmer, on the other hand, the purple one was prettier.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "You may use the sports facilities subject to the following conditions; that your subscription is paid regularly; that you arrange for all necessary cleaning to be carried out.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "She had very little to live on, but she would never have dreamed of taking what was not hers.",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "She was poor but she was honest.",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "If I were you I’d learn how to use commas properly.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "Ken told us we should talk to Russ about it – as if he would know!",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "Your manager told me and I quote, if you don’t like it you know where the door is!",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "He’s a lovely guy: very easy going.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "Writing, which is badly punctuated, is often taken as a sign of ignorance.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "I feel I am suitable for the post for a variety of reasons; I have ten years experience in the field, I possess the relevant qualifications and I am keen to extend my horizons.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "I will forward the files later if that’s OK with you.",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "Admittedly I was partly to blame but I still feel I was slightly hard done by.",
+                "rightAnswers": ["wrong"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "‘I’ll meet you behind the shed,’ he whispered.",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }, {
+                "questionType": "variants-single",
+                "questionText": "The deal, which had provisionally been agreed in Oslo last summer, now looks to be dead.",
+                "rightAnswers": ["right"],
+                "variants": ["right", "wrong"]
+            }]
+        }]
+    </script>
+</head>
+
+<body>
+    <div id="quiz"></div>
+</body>
+
+</html>
