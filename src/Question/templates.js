@@ -30,13 +30,29 @@ const calculateWidth = (answers) => {
   return 210;
 }
 
+
+const insertMultiText = (splitted, width, writtenAnswers) => {
+  if (splitted.length === 2) {
+    return splitted.join(`${answerTemplateInBlank(undefined, width, writtenAnswers)}`)
+  } else {
+    let res = '';
+    for (let i = 0; i < splitted.length; i++) {
+      res += splitted[i];
+      if (i < splitted.length - 1) {
+        res += answerTemplateInBlank(undefined, width, writtenAnswers[i] || '')
+      }
+    }
+    return res;
+  }
+}
+
 export const questionTemplate = (questionData, id, alreadyWrittenAnswer) => {
   if (questionData.questionType === 'text-in-blank') {
     const splitted = questionData.questionText.split(/_+/);
     const width = calculateWidth(questionData.rightAnswers);
     return `
     <div class = "question in-blank" id="${id}">
-      <div class="question-text">${splitted.join(`${answerTemplateInBlank(undefined, width)}`)}</div>
+      <div class="question-text">${insertMultiText(splitted, width, alreadyWrittenAnswer)}</div>
       <div class="check-sign"><i class="fas fa-sign-in-alt"></i></div>
       <div class="hint-sign"><i class="far fa-question-circle"></i></div>
       <div class="hint-container"></div>
@@ -58,10 +74,10 @@ export const questionTemplate = (questionData, id, alreadyWrittenAnswer) => {
 
 }
 
-export const answerTemplateInBlank = (questionData, width) => {
+export const answerTemplateInBlank = (questionData, width, alreadyWrittenAnswer) => {
   return `
   <div style="width:${width}px;" class = "answer-text in-blank">
-    <input class = "answer-text-input in-blank" />
+    <input class = "answer-text-input in-blank" value="${alreadyWrittenAnswer ? alreadyWrittenAnswer : ''}" />
   </div>
 `
 }
@@ -95,13 +111,16 @@ export const answerTemplate = (questionData, id, alreadyWrittenAnswer) => {
     return `
       <form>
         <div>
-          ${questionData.variants.map((value, index) => `
-            <input type="checkbox" id="${questionData.questionText}-${index}"
-              name="${questionData.questionText}" value="${value}" />
-            <label for="${questionData.questionText}-${index}">${value}</label>
-          `).join(' ')}
-        </div>
-      </form>
-    `;
+          ${questionData.variants.map((value, index) => {
+            const answerId = `${questionData.questionText}-${index}`
+            const selected = alreadyWrittenAnswer.includes(value);
+            return `
+                  <input type="checkbox" id="${answerId}"
+                    name="${questionData.questionText}" value="${value}" ${selected ? 'checked' : ''} />
+                  <label for="${questionData.questionText}-${index}">${value}</label>
+                `}).join(' ')}
+              </div>
+            </form>
+          `;
   }
 }

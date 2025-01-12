@@ -1,6 +1,8 @@
 
 import Section from './Section';
 import { ProgressBar } from './ProgressBar';
+import { Storage } from './_utils/Storage';
+import { stringToHash } from './_utils/uid';
 class QuizController {
 
   questions = [];
@@ -9,6 +11,7 @@ class QuizController {
 
   constructor(sections = [], parentElement, testMode = false) {
     this.sections = sections;
+    Storage.setPageHash(stringToHash(sections[0].header) || 0)
     this.maxSectionNumber = sections.length - 1;
     this.testMode = testMode
 

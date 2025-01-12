@@ -52,10 +52,8 @@ export default class IQuestion {
   renderQuestion() {
 
     let selectedAnswer;
-    if(this.testMode){
-      selectedAnswer = Storage.read(this.sectionIndex, this.questionIndex);
-    }
-
+    // if(this.testMode){
+    selectedAnswer = Storage.read(this.sectionIndex, this.questionIndex);
 
     const html = this.questionTemplate(this.questionData, this.id, selectedAnswer);
     this.parentElem.insertAdjacentHTML('beforeend', html);
@@ -101,6 +99,10 @@ export default class IQuestion {
     const inputs = this.mainElement.querySelectorAll('input');
     if (inputs.length === 1) {
       this.mainElement.querySelector('input').addEventListener('keydown', (e) => { if (e.code === "Enter") { this.check(); } });
+      this.mainElement.querySelector('input').addEventListener('change', (e) => {
+        const value  = e.target.value;
+        Storage.write(this.sectionIndex, this.questionIndex, value);
+      });
     }
     console.log('added', this.questionData, this.mainElement.querySelector('.check-sign'));
     this.mainElement.querySelector('.check-sign').addEventListener('click', this.check);

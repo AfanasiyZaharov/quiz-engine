@@ -28,6 +28,9 @@ export default class SingleVariantQuestion extends IQuestion {
       this.check();
       window.document.removeEventListener('change', this.changeListener);
       window.document.removeEventListener('focusin', this.changeListener);
+    }else{
+      const selected = this.mainElement.querySelector(`input[name="${this.questionData.questionText}"]:checked`);
+      Storage.write(this.sectionIndex, this.questionIndex, selected ? selected.value : undefined);
     }
   }
 

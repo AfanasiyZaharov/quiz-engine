@@ -1,6 +1,7 @@
 import { questionTemplate, validateErrorText } from '../templates';
 import { validateMultiBlanks } from '../checkStringValid';
 import IQuestion from './IQuestion';
+import { Storage } from '../../_utils/Storage';
 
 export default class MultipleTextInBlankQuestions extends IQuestion {
   questionTemplate = (...args) => {
@@ -42,9 +43,11 @@ export default class MultipleTextInBlankQuestions extends IQuestion {
 
     if (!this.inputs.includes(e.target)) {
       this.check();
-
       window.document.removeEventListener('change', this.changeListener);
       window.document.removeEventListener('focusin', this.changeListener);
+    }else{
+      const answers = this.getAnswer();
+      Storage.write(this.sectionIndex, this.questionIndex, answers);
     }
   }
 

@@ -1,26 +1,25 @@
-import {questionTemplate, validateErrorText} from '../templates';
-import {validateSimpleText, validateTextInBlank} from '../checkStringValid';
+import { questionTemplate, validateErrorText } from '../templates';
+import { validateSimpleText, validateTextInBlank } from '../checkStringValid';
 import IQuestion from './IQuestion';
 
-export default class SimpleTextQuestion extends IQuestion{
+export default class SimpleTextQuestion extends IQuestion {
   // constructor(questionData, parentElem){
   //   super()
   // }
-  questionTemplate =  (...args) => {
+  questionTemplate = (...args) => {
     return questionTemplate(...args);
   }
 
-  getAnswer(){
+  getAnswer() {
     return this.input.value;
   }
 
-  certainCheck = (userAnswer) =>{  
+  certainCheck = (userAnswer) => {
     const { rightAnswers } = this.questionData;
     return validateSimpleText(userAnswer, rightAnswers);
   }
 
-  changeHandler  = (el) =>{
-
+  changeHandler = (el) => {
     const userValue = el.target.value;
     this.userValue = userValue;
     this.check(userValue);

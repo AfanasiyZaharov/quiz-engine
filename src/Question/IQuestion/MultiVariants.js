@@ -3,6 +3,7 @@ import isEqual from 'lodash.isequal';
 import { questionTemplate, validateErrorText } from '../templates';
 import { validateSimpleText, validateTextInBlank, checkMulti } from '../checkStringValid';
 import IQuestion from './IQuestion';
+import { Storage } from '../../_utils/Storage';
 
 export default class MultiVariantsQuestion extends IQuestion {
 
@@ -23,6 +24,9 @@ export default class MultiVariantsQuestion extends IQuestion {
       this.check();
       window.document.removeEventListener('change', this.changeListener);
       window.document.removeEventListener('focusin', this.changeListener);
+    } else {
+      const answer = this.getAnswer()
+      Storage.write(this.sectionIndex, this.questionIndex, answer);
     }
   }
 

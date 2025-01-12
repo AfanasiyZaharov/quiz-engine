@@ -1,12 +1,16 @@
  class StorageManager {
-    constructor() {
-      this.storageKey = 'vbw-test-saved';
+    constructor(questionshash) {
+
+    }
+  
+    setPageHash(hash){
+      this.storageKey = `vbw-test-saved-${hash}`;
       // Initialize the storage if it doesn't exist
       if (!localStorage.getItem(this.storageKey)) {
         localStorage.setItem(this.storageKey, JSON.stringify({}));
       }
     }
-  
+
     // Write data to the local storage with sectionIndex and questionIndex
     write(sectionIndex, questionIndex, data) {
       const storageData = JSON.parse(localStorage.getItem(this.storageKey));
