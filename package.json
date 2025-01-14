@@ -1,6 +1,6 @@
 {
   "name": "vb-quiz-babeled",
-  "version": "1.0.0",
+  "version": "2.1.2",
   "scripts": {
     "build": "webpack",
     "build:prod": "webpack --config=webpack.prod.config.js",

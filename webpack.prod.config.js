@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const packageJson = require('./package.json');
 
 module.exports = {
   entry: {
@@ -42,7 +43,7 @@ module.exports = {
                 {
                   "regenerator": true
                 }
-              ]
+              ],
             ],
           }
         }
@@ -53,6 +54,11 @@ module.exports = {
         use: path.join(__dirname, "./loaders/scss-loader.js")
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: `Version: ${packageJson.version}`,
+    }),
+  ],
 
 };

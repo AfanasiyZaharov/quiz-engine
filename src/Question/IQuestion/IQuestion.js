@@ -53,7 +53,7 @@ export default class IQuestion {
 
     let selectedAnswer;
     // if(this.testMode){
-    selectedAnswer = Storage.read(this.sectionIndex, this.questionIndex);
+    selectedAnswer = Storage.read(this.sectionIndex, this.questionIndex) || '';
 
     const html = this.questionTemplate(this.questionData, this.id, selectedAnswer);
     this.parentElem.insertAdjacentHTML('beforeend', html);
