@@ -39,7 +39,7 @@ const insertMultiText = (splitted, width, writtenAnswers) => {
     for (let i = 0; i < splitted.length; i++) {
       res += splitted[i];
       if (i < splitted.length - 1) {
-        res += answerTemplateInBlank(undefined, width, writtenAnswers[i] || '')
+        res += answerTemplateInBlank(undefined, width, writtenAnswers ? writtenAnswers[i] || '' : '')
       }
     }
     return res;
