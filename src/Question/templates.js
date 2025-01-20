@@ -5,7 +5,6 @@ export const validateErrorText = (rightAnswers) => {
       ${rightAnswers.map((answer) => `<div class="hint">${answer}</div>`).join(' ')}
     </div>
   `;
-  // return `right answer are ${rightAnswers.join(', ')}`;
 }
 
 const calculateWidth = (answers) => {

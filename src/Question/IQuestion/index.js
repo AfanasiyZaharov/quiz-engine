@@ -72,6 +72,5 @@ export const createQuestion = (questionData, parentElem, callback, testMode=fals
       }
 
       return new SingleVariantQuestion(questionData, parentElem, callback, testMode, sectionIndex, questionIndex);
-      //return new TextInBlankQuestion(questionData, parentElem, callback);
   }
 }

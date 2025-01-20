@@ -3,9 +3,6 @@ import { validateSimpleText, validateTextInBlank } from '../checkStringValid';
 import IQuestion from './IQuestion';
 
 export default class SimpleTextQuestion extends IQuestion {
-  // constructor(questionData, parentElem){
-  //   super()
-  // }
   questionTemplate = (...args) => {
     return questionTemplate(...args);
   }

@@ -29,7 +29,6 @@ class QuizController {
       this.progressBar = new ProgressBar(document.querySelector('.progressBarContainer'), sections.length);
     }
 
-    // this.currentSection = 0;
     this.changeSection(0);
 
     if (testMode) {
@@ -239,7 +238,6 @@ class QuizController {
     this.parentElement.querySelector('.button-container').style.display = 'none';
     let allQuestions = [];
     for (let i = 0; i < this.convertedSections.length; i++) {
-      // allQuestionsLength += this.convertedSections[i].convertedQuestions.length;
       allQuestions = [...allQuestions, ...this.convertedSections[i].convertedQuestions];
     }
     let allQuestionsLength = allQuestions.length - this.convertedSections.length;

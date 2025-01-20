@@ -75,9 +75,7 @@ export const validateSimpleText = (userAnswer, rightAnswers) => {
   } else {
     userAnswersPossibilities = [userAnswer];
   }
-  // console.log('validate simple', userAnswer, rightAnswers);
-  // const userAnswersPossibilities = [userAnswer, prepareString(userAnswer), ...findShorteningsPossibilities(userAnswer)];
-  // console.log('possi', userAnswersPossibilities);
+
   return compareEachToEach([...userAnswersPossibilities, userAnswer], rightAnswers);
 }
 
@@ -158,7 +156,6 @@ export const validateTextInBlank = (userAnswer, rightAnswers, questionText) => {
   } else {
     userAnswersPossibilities = [];
   }
-  // const userAnswersPossibilities = findShorteningsPossibilities(userAnswer);
   return compareEachToEach([...userAnswersPossibilities, userAnswer, prepareString(userAnswer)], rightAnswers);
 }
 
@@ -231,19 +228,6 @@ export const validateMultiBlanks = (userAnswers, rightAnswers) => {
     }
   }
 
-  // for(let i = 0; i<userAnswers.length; i++){
-  //   if(validateSimpleText(userAnswers[i], [rightAnswers[i]])){
-  //     validIndexes.push(i);
-  //   }
-  // }
-
-  if (validIndexes.length === userAnswers.length) {
-    isAllValid = true;
-  }
-  return {
-    correct: isAllValid,
-    correctIndexes: validIndexes,
-  }
 }
 
 

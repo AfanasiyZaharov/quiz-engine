@@ -52,7 +52,6 @@ export default class IQuestion {
   renderQuestion() {
 
     let selectedAnswer;
-    // if(this.testMode){
     selectedAnswer = Storage.read(this.sectionIndex, this.questionIndex) || '';
 
     const html = this.questionTemplate(this.questionData, this.id, selectedAnswer);

@@ -27,9 +27,7 @@ export default class Section{
   }
 
   checkCorrect = () =>{
-    // if(this.testMode){
-    //   return
-    // }
+
     for(let i = 0; i < this.convertedQuestions.length; i++){
       this.convertedQuestions[i].check(false);
     }
@@ -37,7 +35,6 @@ export default class Section{
     if(!falseValues.length){
       this.completed = true;
       this.allRightCallBack();
-      //this.renderNextSectionButton();
     }
 
   }
@@ -74,6 +71,5 @@ export default class Section{
     this.rendered = true;
 
     this.renderQuiz();
-    // sectionData.questions;
   }
 }
